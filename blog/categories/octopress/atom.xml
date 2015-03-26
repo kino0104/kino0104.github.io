@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Octopress | Web Engineer Notes]]></title>
+  <link href="http://kino0104.github.io/blog/categories/octopress/atom.xml" rel="self"/>
+  <link href="http://kino0104.github.io/"/>
+  <updated>2015-03-26T21:16:35+09:00</updated>
+  <id>http://kino0104.github.io/</id>
+  <author>
+    <name><![CDATA[kino0104]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Octopressを使う]]></title>
+    <link href="http://kino0104.github.io/blog/2015/03/26/octopress-install/"/>
+    <updated>2015-03-26T19:56:55+09:00</updated>
+    <id>http://kino0104.github.io/blog/2015/03/26/octopress-install</id>
+    <content type="html"><![CDATA[<p>Octopressを使って無料ブログを作成しました。</p>
+
+<h2>目次</h2>
+
+<pre><code>1. Githubでリポジトリ作成
+2. Octopressのインストール
+3. Octopressの初期設定
+4. 記事を投稿する
+5. 記事の中に画像を使う
+6. デプロイする
+</code></pre>
+
+<h2>1. Githubでリポジトリ作成</h2>
+
+<p>最初にGithubへログインして、リポジトリを作成します。
+リポジトリ名は<code>username.github.io</code>とします。
+usernameはGithubのユーザ名を入れます。</p>
+
+<p><img src="/images/2015-03-26-octopress-install/octopress1.png" alt="octopress" /></p>
+
+<h2>2. Octopressのインストール</h2>
+
+<p>次に、作業ディレクトリに移動して、OctopressをGithubからクローンします。
+usernameはGithubのユーザ名を入れます。</p>
+
+<pre><code>cd /work/blog
+git clone git@github.com:imathis/octopress.git username.github.io
+</code></pre>
+
+<p>bundlerをインストールします。</p>
+
+<pre><code>gem install bundler
+</code></pre>
+
+<p>必要なgemをインストールします。</p>
+
+<pre><code>bundle install --path vendor/bundle --jobs=4
+</code></pre>
+
+<h2>3. Octopressの初期設定</h2>
+
+<p>GitHub Pageに表示するために、下記コマンドを入力します。
+usernameはGithubのユーザ名を入れます。</p>
+
+<pre><code>bundle exec rake setup_github_pages
+
+Enter the read/write url for your repository
+//リポジトリのURLを聞かれるので、git@github.com: username/username.github.com.gitと入力
+Repository url: 
+</code></pre>
+
+<p>次に、_config.ymlを編集します。
+この中には、ブログのタイトルやサブタイトル、著者情報などを記述します。</p>
+
+<pre><code>url:                # For rewriting urls for RSS, etc
+title:              # Used in the header and title tags
+subtitle:           # A description used in the header
+author:             # Your name, for RSS, Copyright, Metadata
+simple_search:      # Search engine for simple site search
+description:        # A default meta description for your site
+date_format:        # Format dates using Ruby's date strftime syntax
+subscribe_rss:      # Url for your blog's feed, defauts to /atom.xml
+subscribe_email:    # Url to subscribe by email (service required)
+category_feeds:     # Enable per category RSS feeds (defaults to false in 2.1)
+email:              # Email address for the RSS feed if you want it.
+</code></pre>
+
+<h2>4. 記事を投稿する</h2>
+
+<p>ここまで完了したら、さっそくブログ記事を作成してみます。
+まずは記事のテンプレートを作成するために、下記コマンドを実行します。</p>
+
+<pre><code>bundle exec rake new_post
+Enter a title for your post: //記事のタイトルを入力(この記事はoctopress-install)
+</code></pre>
+
+<p>Enter a title for your postで入力するタイトルはパーマリンクになるので、英語で記述する必要があります。</p>
+
+<p><code>source/_posts/2015-03-26-title.markdown</code>というようなテンプレートが生成されますので、エディタで開いて編集します。</p>
+
+<pre><code>---
+layout: post
+title: "title"
+date: 2015-03-26 19:56:55 +0900
+comments: true
+categories: [category1, category2,...]
+---
+
+//記事の内容をいかに書いていく
+</code></pre>
+
+<p>記事のタイトルやカテゴリーを入力します。ここでのタイトルは日本語で問題ありません。</p>
+
+<p>記事を書いたら、以下のコマンドでプレビュー表示して確認してみます。</p>
+
+<pre><code>rake preview
+</code></pre>
+
+<p>実行後に、<code>http://localhost:4000</code>にアクセスすると、
+プレビューを確認できます。</p>
+
+<h2>5. 記事の中に画像を使う</h2>
+
+<p>記事を書いていると、画像を使いたい場合があります。
+Octopressでは、画像は<code>source/images</code>に保存します。
+ただ、imagesディレクトリに直接画像ファイルを置くと、わけがわからなくなるので、例えば、記事のタイトルと同じディレクトリを用意して、その中に画像ファイルを格納します。</p>
+
+<p>今回で言うと、<code>/images/2015-03-26-octopress-install/</code>です。
+octopress1.pngをここに保存しておきます。</p>
+
+<p>Markdown記法では、画像は下記のように指定します。</p>
+
+<pre><code>![代替テキスト](画像のURL)
+</code></pre>
+
+<p>公式(<a href="http://octopress.org/docs/plugins/image-tag/">Image Tag</a>)では、
+下記の書き方が紹介されています。</p>
+
+<pre><code><img class="[class names]" src="/path/to/image" title="[width] [height] [title text [alt text]]" >
+</code></pre>
+
+<p>また、画像の指定は、相対指定と絶対指定があります。
+この記事で一番はじめに登場する画像は下記の相対指定で書いています！</p>
+
+<pre><code>相対指定:/images/2015-03-26-octopress-install/octopress1.png
+絶対指定:http://kino0104.github.io/images/2015-03-26-octopress-install/octopress1.png
+</code></pre>
+
+<h2>6. デプロイする</h2>
+
+<p>最後にデプロイして、記事投稿完了です。</p>
+
+<pre><code>bundle exec rake deploy
+</code></pre>
+
+<p>簡単ではありますが、Octopressでのブログ作成手順でした。
+不明点や間違いがありましたら、コメントいただければと思います。</p>
+]]></content>
+  </entry>
+  
+</feed>
