@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Octopress | Web Engineer Notes]]></title>
   <link href="http://kino0104.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://kino0104.github.io/"/>
-  <updated>2015-03-26T21:16:35+09:00</updated>
+  <updated>2015-03-26T22:06:52+09:00</updated>
   <id>http://kino0104.github.io/</id>
   <author>
     <name><![CDATA[kino0104]]></name>
@@ -18,7 +18,12 @@
     <link href="http://kino0104.github.io/blog/2015/03/26/octopress-install/"/>
     <updated>2015-03-26T19:56:55+09:00</updated>
     <id>http://kino0104.github.io/blog/2015/03/26/octopress-install</id>
-    <content type="html"><![CDATA[<p>Octopressを使って無料ブログを作成しました。</p>
+    <content type="html"><![CDATA[<p>Octopressを使って無料ブログを作成しましたので、その手順を説明します。
+エディタとgitで管理できるので、便利かなーと思い、導入してみました。
+この記事がOctopressで書く初めての記事になります。</p>
+
+<!-- more -->
+
 
 <h2>目次</h2>
 
@@ -148,10 +153,20 @@ octopress1.pngをここに保存しておきます。</p>
 
 <h2>6. デプロイする</h2>
 
-<p>最後にデプロイして、記事投稿完了です。</p>
-
-<pre><code>bundle exec rake deploy
-</code></pre>
+<p>最後にデプロイして、記事投稿完了です。
+途中、Githubのユーザ名とパスワードを入力する必要があります。
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>bundle exec rake deploy&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h2&gt;Pushing generated _deploy website&lt;/h2&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;Username for &lsquo;&lt;a href="https://github.com"&gt;https://github.com&lt;/a&gt;&rsquo;:
+</span><span class='line'>Password for &lsquo;&lt;a href="https://username@github.com"&gt;https://username@github.com&lt;/a&gt;&rsquo;:</span></code></pre></td></tr></table></div></figure></p>
 
 <p>簡単ではありますが、Octopressでのブログ作成手順でした。
 不明点や間違いがありましたら、コメントいただければと思います。</p>

@@ -4,7 +4,7 @@
   <title><![CDATA[Web Engineer Notes]]></title>
   <link href="http://kino0104.github.io/atom.xml" rel="self"/>
   <link href="http://kino0104.github.io/"/>
-  <updated>2015-03-26T21:16:35+09:00</updated>
+  <updated>2015-03-26T22:06:52+09:00</updated>
   <id>http://kino0104.github.io/</id>
   <author>
     <name><![CDATA[kino0104]]></name>
@@ -18,7 +18,12 @@
     <link href="http://kino0104.github.io/blog/2015/03/26/octopress-install/"/>
     <updated>2015-03-26T19:56:55+09:00</updated>
     <id>http://kino0104.github.io/blog/2015/03/26/octopress-install</id>
-    <content type="html"><![CDATA[<p>Octopressを使って無料ブログを作成しました。</p>
+    <content type="html"><![CDATA[<p>Octopressを使って無料ブログを作成しましたので、その手順を説明します。
+エディタとgitで管理できるので、便利かなーと思い、導入してみました。
+この記事がOctopressで書く初めての記事になります。</p>
+
+<!-- more -->
+
 
 <h2>目次</h2>
 
@@ -180,10 +185,19 @@ octopress1.pngをここに保存しておきます。</p>
 
 <h2>6. デプロイする</h2>
 
-<p>最後にデプロイして、記事投稿完了です。</p>
+<p>最後にデプロイして、記事投稿完了です。
+途中、Githubのユーザ名とパスワードを入力する必要があります。</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>bundle exec rake deploy</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>bundle exec rake deploy
+</span><span class='line'>
+</span><span class='line'>## Pushing generated _deploy website
+</span><span class='line'>Username for 'https://github.com': 
+</span><span class='line'>Password for 'https://username@github.com': </span></code></pre></td></tr></table></div></figure>
 
 
 <p>簡単ではありますが、Octopressでのブログ作成手順でした。
