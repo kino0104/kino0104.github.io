@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Git | プログラミングしたり。]]></title>
+  <link href="http://kino0104.github.io/blog/categories/git/atom.xml" rel="self"/>
+  <link href="http://kino0104.github.io/"/>
+  <updated>2015-03-30T16:24:25+09:00</updated>
+  <id>http://kino0104.github.io/</id>
+  <author>
+    <name><![CDATA[kino0104]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Gitトラブルシューティング]]></title>
+    <link href="http://kino0104.github.io/blog/2015/03/30/git-trouble-shooting/"/>
+    <updated>2015-03-30T16:05:57+09:00</updated>
+    <id>http://kino0104.github.io/blog/2015/03/30/git-trouble-shooting</id>
+    <content type="html"><![CDATA[<p>Gitを使用してる中で出会ったエラーとその対処方法について、忘れたときのメモとして残していきます。</p>
+
+<!-- more -->
+
+
+<h2>目次</h2>
+
+<pre><code>1.git pushでrejectされた場合
+</code></pre>
+
+<h2>1.git pushでrejectされた場合</h2>
+
+<p><code>git push origin master</code>など<code>git push</code>したら、下記のようなメッセージが表示されてpushできないということがありました。</p>
+
+<pre><code> ! [rejected]        master -&gt; master (non-fast-forward)
+</code></pre>
+
+<p>自分が変更した内容をpushしようとしたのですが、他の人がpushして自分のローカルがリモート先よりも古くなっている場合にこのメッセージが表示されます。
+よって、まずはリモート内容を自分のローカル(origin/master)に取り入れて、マージする必要があります。
+そのあとで、pushすることができるようになります。</p>
+
+<p>肝心のこの状態を脱却するためのコマンドは以下の通りです。</p>
+
+<pre><code>git fetch &amp;&amp; git merge origin/master
+</code></pre>
+
+<p>他にもgit関連でエラーとかが発生したら、ここに追記していきたいと思います。
+不明点や間違いがありましたら、コメントいただければと思います。</p>
+]]></content>
+  </entry>
+  
+</feed>
