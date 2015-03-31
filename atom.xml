@@ -4,7 +4,7 @@
   <title><![CDATA[プログラミングしたり。]]></title>
   <link href="http://kino0104.github.io/atom.xml" rel="self"/>
   <link href="http://kino0104.github.io/"/>
-  <updated>2015-03-31T21:54:55+09:00</updated>
+  <updated>2015-03-31T23:22:19+09:00</updated>
   <id>http://kino0104.github.io/</id>
   <author>
     <name><![CDATA[kino0104]]></name>
@@ -12,6 +12,109 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[プログラムはこうして作られる、を読んでみた]]></title>
+    <link href="http://kino0104.github.io/blog/2015/03/31/program-builtup-bookrv/"/>
+    <updated>2015-03-31T22:21:18+09:00</updated>
+    <id>http://kino0104.github.io/blog/2015/03/31/program-builtup-bookrv</id>
+    <content type="html"><![CDATA[<p>「プログラムはこうして作られる」という本を読みました。
+いや、読んでいます。
+まだ、読み切ってないので、タイトルに語弊はありますが、途中まで読んだ段階でメモ書きも含めて役に立ったところを書いていきたいと思います。
+内容としては、著者である平山尚さんが作成したSunabaという言語を使用して、テトリスを作ってみようというものです。
+あの有名なゲームであるテトリスって、どうやって考えて作られているの？というのがわかります。</p>
+
+<!-- more -->
+
+
+<h2>プログラムは思ったようには動かない。書いたように動く</h2>
+
+<p>プログラムを書いて動かないとき、この考え方をしっかりする必要があります。
+当たり前なようで、プログラミング初心者はなかなか意識できていないことではないでしょうか。</p>
+
+<p>何かプログラムを書いて、意図しない画面表示になったときは自分が書いたプログラムがそのようになっています。
+なぜ動かないんだ！と苛立ってしまったりすることがあると思います。
+自分もハマってイライラしてしまうことがあり、そういうときは冷静に考えられないので、余計解決に時間がかかるという負のスパイラルになっていきます。</p>
+
+<h2>結果から考える</h2>
+
+<p>書いたように動く、と先ほど当たり前のことを書きました。</p>
+
+<p>うまく動かないとなったときに、書いたプログラムとにらめっこするのではなく、
+その挙動が起こうる状態はどんなときか考える、推理しようということが書かれています。</p>
+
+<p>例えば、以下のようなコードを見てください。
+ほしい結果は下記の通りですが、これを実行して得られる結果は#が1行に5つ表示されるという結果になります。
+このとき、1行しか表示されないのはどんなときか考えることを推奨しています。</p>
+
+<p>４行分繰り返していないのか、そもそも#が5つしか表示されないコードになっているのか、と言ったことが考えられると思います。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;?php
+</span><span class='line'>for($i=0;$i&lt;4;$i++){
+</span><span class='line'>  for($i=0;$i&lt;5;$i++){
+</span><span class='line'>      echo "#";
+</span><span class='line'>  }
+</span><span class='line'>  echo "&lt;br&gt;";
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>//ほしい結果
+</span><span class='line'>#####
+</span><span class='line'>#####
+</span><span class='line'>#####
+</span><span class='line'>#####
+</span><span class='line'>
+</span><span class='line'>//得られる結果
+</span><span class='line'>#####</span></code></pre></td></tr></table></div></figure>
+
+
+<p>得られた結果から、推理し、原因を追求していくということが大切だと書いてありました。</p>
+
+<h2>思ったように書くための3つの思考</h2>
+
+<p>今こういう結果である以上、プログラムはこうなっているはずだ、と考えて間違いを推理する。
+また、ほしい結果を得るために満たすべき条件は○○だが、満たされているか、を合わせて考える。</p>
+
+<p>これらをふまえた上で、以下の3つの思考をしましょうということが謳われています。</p>
+
+<ul>
+<li>動かしてみて、理想と現実がどう違うのかを把握する</li>
+<li>このような現実になっているのはなぜかを考える</li>
+<li>理想と現実を一致させるために必要なものは何かを考える</li>
+</ul>
+
+
+<p>「どう間違っている必要があるかを考える」ということは、自分の中でもしっかりと意識していきたいと思います。</p>
+
+<h2>機能を知ることより、その機能が目的を果たすかを納得すること</h2>
+
+<p>実現したいことのために、こんなことができたらよいなと考えに考え尽くした上で、機能を知ることにより、
+どの場面でそれを使うべきかというのが自分のものとして理解できるというような内容が書かれていました。</p>
+
+<p>確かに、今知っている自分の知識で、やりたいことを実現しようとして、「なんかコードが長過ぎる」「手間がかかりすぎる」となってから、機能を知るというのは重要かなと思います。</p>
+
+<p>やりたいことをネットで探せば、ある程度近い内容のコードがあったりして、そういったものを繋ぎ合わせるだけで、動くものが作れたりもする場合があります。
+しかし、この本では、自分で考えていくことの大切さはもちろんのこと、自分で考えるためにどうすればよいか、テトリスという題材を元に思考の掘り下げ方を教えてくれました。
+実際にSunabaという言語を用いて、書いていくことが良いとは思いますが、本を読むだけでも参考になる点があるので、プログラミング初心者の方にはオススメの本です。</p>
+
+<p>また、読み終わった後に、自分が勉強している言語でテトリスを作ってみるのがよいかなと思います。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Gitトラブルシューティング]]></title>
