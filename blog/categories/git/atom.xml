@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Git | プログラミングしたり。]]></title>
+  <title><![CDATA[Category: git | プログラミングしたり。]]></title>
   <link href="http://kino0104.github.io/blog/categories/git/atom.xml" rel="self"/>
   <link href="http://kino0104.github.io/"/>
-  <updated>2015-03-31T23:22:19+09:00</updated>
+  <updated>2015-04-01T21:55:57+09:00</updated>
   <id>http://kino0104.github.io/</id>
   <author>
     <name><![CDATA[kino0104]]></name>

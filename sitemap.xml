@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://kino0104.github.io/blog/2015/04/01/apache-mimetype-xlsx/</loc>
+    <lastmod>2015-04-01T21:43:22+09:00</lastmod>
+  </url>
+  <url>
     <loc>http://kino0104.github.io/blog/2015/03/31/program-builtup-bookrv/</loc>
     <lastmod>2015-03-31T22:21:18+09:00</lastmod>
   </url>
@@ -26,5 +30,14 @@
   </url>
   <url>
     <loc>http://kino0104.github.io/blog/categories/bookreview/</loc>
+  </url>
+  <url>
+    <loc>http://kino0104.github.io/blog/categories/apache/</loc>
+  </url>
+  <url>
+    <loc>http://kino0104.github.io/blog/categories/gnu/</loc>
+  </url>
+  <url>
+    <loc>http://kino0104.github.io/blog/categories/linux/</loc>
   </url>
 </urlset>

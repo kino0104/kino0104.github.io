@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Octopress | プログラミングしたり。]]></title>
+  <title><![CDATA[Category: octopress | プログラミングしたり。]]></title>
   <link href="http://kino0104.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://kino0104.github.io/"/>
-  <updated>2015-03-31T23:22:19+09:00</updated>
+  <updated>2015-04-01T21:55:57+09:00</updated>
   <id>http://kino0104.github.io/</id>
   <author>
     <name><![CDATA[kino0104]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Octopressを使う]]></title>
+    <title type="html"><![CDATA[octopressを使う]]></title>
     <link href="http://kino0104.github.io/blog/2015/03/26/octopress-install/"/>
     <updated>2015-03-26T19:56:55+09:00</updated>
     <id>http://kino0104.github.io/blog/2015/03/26/octopress-install</id>

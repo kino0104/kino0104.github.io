@@ -4,7 +4,7 @@
   <title><![CDATA[プログラミングしたり。]]></title>
   <link href="http://kino0104.github.io/atom.xml" rel="self"/>
   <link href="http://kino0104.github.io/"/>
-  <updated>2015-03-31T23:22:19+09:00</updated>
+  <updated>2015-04-01T21:55:57+09:00</updated>
   <id>http://kino0104.github.io/</id>
   <author>
     <name><![CDATA[kino0104]]></name>
@@ -12,6 +12,59 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[xlsxファイルをダウンロードしようとしたらzipがダウンロードされた]]></title>
+    <link href="http://kino0104.github.io/blog/2015/04/01/apache-mimetype-xlsx/"/>
+    <updated>2015-04-01T21:43:22+09:00</updated>
+    <id>http://kino0104.github.io/blog/2015/04/01/apache-mimetype-xlsx</id>
+    <content type="html"><![CDATA[<p>タイトル通りですが、サーバ上にxlsxファイルを置いてHTMLのリンクからダウンロードしようとしたら、zipファイルでダウンロードされました。
+その対処方法について記述します。</p>
+
+<!-- more -->
+
+
+<h2>対処方法</h2>
+
+<p><code>.htaccess</code>か<code>mime.types</code>のいずれかにMIMEタイプを追記する必要があります。</p>
+
+<p><code>.htaccess</code>の場合は、下記内容を追記します。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>AddType application/vnd.openxmlformats .docx .pptx .xlsx</span></code></pre></td></tr></table></div></figure>
+
+
+<p>.htaccessがなかったり、このファイルを作成したくない場合は<code>mime.types</code>に追記します。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>application/vnd.openxmlformats-officedocument.wordprocessingml.document  docx
+</span><span class='line'>application/vnd.openxmlformats-officedocument.spreadsheetml.sheet xlsx
+</span><span class='line'>application/vnd.openxmlformats-officedocument.presentationml.presentatio pptx</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>.htaccess</code>か<code>mime.types</code>がどこにある川からない場合は、下記コマンドで探しましょう。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>//mime.type野場合
+</span><span class='line'>find / -name mime.types</span></code></pre></td></tr></table></div></figure>
+
+
+<p>また、追記する前に編集前のファイルはコピーしておきましょう。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cp mime.types mime.types.origin</span></code></pre></td></tr></table></div></figure>
+
+
+<p>追記した後は、apacheを再起動する必要があります。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>service httpd restart</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[プログラムはこうして作られる、を読んでみた]]></title>
@@ -155,7 +208,7 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Octopressを使う]]></title>
+    <title type="html"><![CDATA[octopressを使う]]></title>
     <link href="http://kino0104.github.io/blog/2015/03/26/octopress-install/"/>
     <updated>2015-03-26T19:56:55+09:00</updated>
     <id>http://kino0104.github.io/blog/2015/03/26/octopress-install</id>

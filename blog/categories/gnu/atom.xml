@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: gnu | プログラミングしたり。]]></title>
+  <link href="http://kino0104.github.io/blog/categories/gnu/atom.xml" rel="self"/>
+  <link href="http://kino0104.github.io/"/>
+  <updated>2015-04-01T21:55:57+09:00</updated>
+  <id>http://kino0104.github.io/</id>
+  <author>
+    <name><![CDATA[kino0104]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[xlsxファイルをダウンロードしようとしたらzipがダウンロードされた]]></title>
+    <link href="http://kino0104.github.io/blog/2015/04/01/apache-mimetype-xlsx/"/>
+    <updated>2015-04-01T21:43:22+09:00</updated>
+    <id>http://kino0104.github.io/blog/2015/04/01/apache-mimetype-xlsx</id>
+    <content type="html"><![CDATA[<p>タイトル通りですが、サーバ上にxlsxファイルを置いてHTMLのリンクからダウンロードしようとしたら、zipファイルでダウンロードされました。
+その対処方法について記述します。</p>
+
+<!-- more -->
+
+
+<h2>対処方法</h2>
+
+<p><code>.htaccess</code>か<code>mime.types</code>のいずれかにMIMEタイプを追記する必要があります。</p>
+
+<p><code>.htaccess</code>の場合は、下記内容を追記します。</p>
+
+<pre><code>AddType application/vnd.openxmlformats .docx .pptx .xlsx
+</code></pre>
+
+<p>.htaccessがなかったり、このファイルを作成したくない場合は<code>mime.types</code>に追記します。</p>
+
+<pre><code>application/vnd.openxmlformats-officedocument.wordprocessingml.document docx
+application/vnd.openxmlformats-officedocument.spreadsheetml.sheet xlsx
+application/vnd.openxmlformats-officedocument.presentationml.presentatio pptx
+</code></pre>
+
+<p><code>.htaccess</code>か<code>mime.types</code>がどこにある川からない場合は、下記コマンドで探しましょう。</p>
+
+<pre><code>//mime.type野場合
+find / -name mime.types
+</code></pre>
+
+<p>また、追記する前に編集前のファイルはコピーしておきましょう。</p>
+
+<pre><code>cp mime.types mime.types.origin
+</code></pre>
+
+<p>追記した後は、apacheを再起動する必要があります。</p>
+
+<pre><code>service httpd restart
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>
