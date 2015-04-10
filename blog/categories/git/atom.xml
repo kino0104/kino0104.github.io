@@ -4,7 +4,7 @@
   <title><![CDATA[Category: git | プログラミングしたり。]]></title>
   <link href="http://kino0104.github.io/blog/categories/git/atom.xml" rel="self"/>
   <link href="http://kino0104.github.io/"/>
-  <updated>2015-04-01T21:55:57+09:00</updated>
+  <updated>2015-04-10T23:22:36+09:00</updated>
   <id>http://kino0104.github.io/</id>
   <author>
     <name><![CDATA[kino0104]]></name>
@@ -46,6 +46,412 @@
 
 <p>他にもgit関連でエラーとかが発生したら、ここに追記していきたいと思います。
 不明点や間違いがありましたら、コメントいただければと思います。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Gitコマンドまとめ]]></title>
+    <link href="http://kino0104.github.io/tool/git-command/"/>
+    <updated>2015-03-02T05:40:57+09:00</updated>
+    <id>http://kino0104.github.io/tool/git-command</id>
+    <content type="html"><![CDATA[<div id="toc_container" class="toc_transparent no_bullets">
+  <p class="toc_title">
+    - 目次 -
+  </p>
+  
+  <ul class="toc_list">
+    <li>
+      <a href="#i"><span class="toc_number toc_depth_1">1</span> インストールする</a>
+    </li>
+    <li>
+      <a href="#i-2"><span class="toc_number toc_depth_1">2</span> 使う前の設定</a>
+    </li>
+    <li>
+      <a href="#i-3"><span class="toc_number toc_depth_1">3</span> じゃ、使い始めよう！</a><ul>
+        <li>
+          <a href="#git"><span class="toc_number toc_depth_2">3.1</span> gitを使用する作業ディレクトリを決める。</a>
+        </li>
+        <li>
+          <a href="#git_add"><span class="toc_number toc_depth_2">3.2</span> ステージングエリアにアップする(git add)</a>
+        </li>
+        <li>
+          <a href="#git_commit"><span class="toc_number toc_depth_2">3.3</span> リポジトリにアップする(git commit)</a>
+        </li>
+        <li>
+          <a href="#git_log"><span class="toc_number toc_depth_2">3.4</span> アップした履歴を見る(git log)</a>
+        </li>
+        <li>
+          <a href="#git_status"><span class="toc_number toc_depth_2">3.5</span> 現在の状態を確認する(git status)</a>
+        </li>
+        <li>
+          <a href="#git_diff"><span class="toc_number toc_depth_2">3.6</span> 差分を確認する(git diff)</a>
+        </li>
+        <li>
+          <a href="#i-4"><span class="toc_number toc_depth_2">3.7</span> 管理下に含めたくないファイル</a>
+        </li>
+        <li>
+          <a href="#i-5"><span class="toc_number toc_depth_2">3.8</span> 直前のコミットを微修正する</a>
+        </li>
+        <li>
+          <a href="#i-6"><span class="toc_number toc_depth_2">3.9</span> 過去のバージョンから戻る</a>
+        </li>
+        <li>
+          <a href="#i-7"><span class="toc_number toc_depth_2">3.10</span> ブランチ(分岐)を使う</a>
+        </li>
+        <li>
+          <a href="#i-8"><span class="toc_number toc_depth_2">3.11</span> ブランチをマージする</a>
+        </li>
+        <li>
+          <a href="#i-9"><span class="toc_number toc_depth_2">3.12</span> マージの衝突を解決する</a>
+        </li>
+        <li>
+          <a href="#i-10"><span class="toc_number toc_depth_2">3.13</span> タグを使う</a>
+        </li>
+        <li>
+          <a href="#git-2"><span class="toc_number toc_depth_2">3.14</span> エイリアスを使う(gitコマンドを短縮して使う)</a>
+        </li>
+        <li>
+          <a href="#i-11"><span class="toc_number toc_depth_2">3.15</span> 共有リポジトリを使って作業する</a>
+        </li>
+        <li>
+          <a href="#i-12"><span class="toc_number toc_depth_2">3.16</span> その他便利なコマンド</a><ul>
+            <li>
+              <a href="#git_rebase"><span class="toc_number toc_depth_3">3.16.1</span> 便利なマージ方法(git rebase)</a>
+            </li>
+            <li>
+              <a href="#i-13"><span class="toc_number toc_depth_3">3.16.2</span> 相対リファレンス</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    
+    <li>
+      <a href="#i-14"><span class="toc_number toc_depth_1">4</span> 参考になる学習サイト</a>
+    </li>
+  </ul>
+</div>
+
+
+<p>Gitはファイルを作成したり、変更したりしたときの履歴をバージョン管理できる。<br/>
+以下、3つのエリアを用いて管理していく<br/>
+1.作業ディレクトリ<br/>
+2.ステージングエリア<br/>
+3.リポジトリ</p>
+
+<h2><span id="i">インストールする</span></h2>
+
+<pre><code>$ yum install git
+</code></pre>
+
+<h2><span id="i-2">使う前の設定</span></h2>
+
+<p>使用始める前に、user名とemailの設定する必要があるので、<br/>
+下記コマンドから登録する</p>
+
+<pre><code>git config --global user.name "user名"
+git config --global user.email "mail adress"
+git config --global color.ui true
+</code></pre>
+
+<p>上記設定内容は下記のコマンドで確認できる</p>
+
+<pre><code>git config -l
+</code></pre>
+
+<h2><span id="i-3">じゃ、使い始めよう！</span></h2>
+
+<h3><span id="git">gitを使用する作業ディレクトリを決める。</span></h3>
+
+<p>この作業ディレクトリ内に作ったディレクトリやファイルが管理対象となる。</p>
+
+<pre><code>//作業ディレクトリdirに移動
+$ cd dir/
+//一応、移動がちゃんとできているか現在のディレクトリ位置を確認
+$ pwd
+/home/vagrant/dir
+//gitを使用する
+git init
+</code></pre>
+
+<h3><span id="git_add">ステージングエリアにアップする(git add)</span></h3>
+
+<p>作業ディレクトリにindex.htmlを作成したとする。<br/>
+これをステージングエリアにアップしてみる</p>
+
+<pre><code>//index.htmlをアップする
+$ git add index.html
+
+//今のディレクトリとその配下にあるファイルを全部アップする
+$ git add . 
+</code></pre>
+
+<h3><span id="git_commit">リポジトリにアップする(git commit)</span></h3>
+
+<p>次に、リポジトリにアップしてみよう</p>
+
+<pre><code>//実行後にメッセージを入力することになるので、変更点等を簡潔に入力する
+$ git commit
+
+//メッセージが簡単に書いてcommitする
+$ git commit -m "index.html modified"
+</code></pre>
+
+<h3><span id="git_log">アップした履歴を見る(git log)</span></h3>
+
+<p>今、ステージングエリアとリポジトリにファイルをアップした。<br/>
+その履歴を見てみる。</p>
+
+<pre><code>$ git log
+
+//さらにコンパクトにlogを見る
+$ git log --oneline
+
+//どの場所が変更されたのか見る
+$ git log -p
+
+//どのファイルが何カ所変更されたか見る
+$ git log -stat
+</code></pre>
+
+<h3><span id="git_status">現在の状態を確認する(git status)</span></h3>
+
+<p>ファイルを作成したり、修正したりして、<br/>
+今、index.htmlはステージングエリアにアップしてたっけ？<br/>
+リポジトリにアップしたっけ？とわからなくなることがある。<br/>
+そんなときは、現在の状態を確認するコマンドを入力する。</p>
+
+<pre><code>$ git status
+
+# On branch master
+# Changed but not updated: //まだステージングにもリポジトリにもアップされてない。
+#   (use "git add &lt;file&gt;..." to update what will be committed) 
+#   (use "git checkout -- &lt;file&gt;..." to discard changes in working directory) 
+#
+#  modified:   index.html //index.htmlが変更されていることがわかる
+#
+</code></pre>
+
+<h3><span id="git_diff">差分を確認する(git diff)</span></h3>
+
+<p>ファイルの差分を確認する。</p>
+
+<pre><code>//ステージに上がっていないファイルの変更点を確認
+$ git diff
+
+//ステージに上がっているファイルが次のcommitでどこが変更されるか確認
+$ git diff --cached
+</code></pre>
+
+<p>ファイルを操作する(削除や移動など)</p>
+
+<pre><code>//移動
+$ git mv index.html
+//削除
+$ git rm index.html
+</code></pre>
+
+<h3><span id="i-4">管理下に含めたくないファイル</span></h3>
+
+<p>git管理下となった作業ディレクトリでも管理したくないファイルがあると言ったときは「.gitignore」を使用する。</p>
+
+<p>.gitignoreを置いたディレクトリ及び配下のディレクトリが適用対象になる。</p>
+
+<pre><code>$ vi .gitignore
+
+
+//ログファイルは管理しない記述。管理したくないものを記述する
+*.log
+</code></pre>
+
+<h3><span id="i-5">直前のコミットを微修正する</span></h3>
+
+<p>commitしたあとに、微々たる修正をしたい。つまり、git logで履歴を載せて管理するほどの修正ではない&#8230;というときに使うコマンド。</p>
+
+<pre><code>//直前のコミットを変更(commitログには表示しない。ちょっとした変更)
+$ git commit --amend
+</code></pre>
+
+<h3><span id="i-6">過去のバージョンから戻る</span></h3>
+
+<p>resetとrevertがある。<br/>
+resetはなかったことにする。revertは巻き戻すというイメージ。<br/>
+resetは履歴に残らないが、revertは履歴に残る。</p>
+
+<pre><code>// git addしたあとに一つ前の状態に戻る
+$ git reset --hard HEAD
+
+//　git addしたあとに2つ前の状態に戻る
+$ git reset --hard HEAD^
+$ git reset --hard [commitの番号指定でも良い]
+
+//戻ったのを取り消す(ORIG_HEADに１つ前の状態が保存される)
+$ git reset --hard ORIG_HEAD
+
+git reset ブランチのポインタを後方へ移動。履歴の上書き
+
+git revert HEAD
+</code></pre>
+
+<h3><span id="i-7">ブランチ(分岐)を使う</span></h3>
+
+<p>初めはmasterしかない。<br/>
+ちょっとコードを変えて試してみたいときに、大元のmasterブランチで作業するのではなく、もう一つブランチを作成して、そちらでコードを修正する。良い感じのコードが書ければ、あとからmasterブランチに統合するといった使い方をする。</p>
+
+<pre><code>$ git branch
+* master
+
+// hogeブランチを作成する
+git branch hoge
+  hoge
+* master
+
+//今いるブランチは*が付いている方
+//ブランチを移動する
+$ git checkout hoge
+$ git branch
+* hoge
+master
+
+//ブランチの作成と作成したブランチに移動を一気にやる
+$ git checkout -b hoge
+</code></pre>
+
+<h3><span id="i-8">ブランチをマージする</span></h3>
+
+<p>先に記述したように、分岐したブランチで良い感じのコードが書けたので、masterに統合するコマンド。</p>
+
+<pre><code>$ git merge hoge
+
+//mergeしたあとに、作成したブランチいらないから削除する
+$ git branch -d hoge
+</code></pre>
+
+<h3><span id="i-9">マージの衝突を解決する</span></h3>
+
+<p>衝突とは、ブランチ1でindex.htmlを編集し、commitしたあと、<br/>
+masterブランチでもindex.htmlを編集し、commitをした。<br/>
+そのあと、ブランチ1をマージしようとした。というケース<br/>
+異なるブランチで同じファイルが修正されているため、どちらのコードを正とするのか決める必要がある。</p>
+
+<pre><code>//衝突が起きたファイルをviコマンドで開き、必要なコードだけを残し、保存する
+$ vi index.html
+</code></pre>
+
+<h3><span id="i-10">タグを使う</span></h3>
+
+<p>タグと言うものをつけて、履歴を管理することもできる。<br/>
+git logで見たときにcommit d96bc437694&#8230;.というidでも色々操作できるがわかりにくい</p>
+
+<pre><code>commit d96bc43769409df0aa9b46614fe2a0a23b9ca5dc //これわかりにくい
+Author: user名 &lt;mail address&gt;
+Date:   Sat Feb 28 12:20:13 2015 +0000
+
+    test commit
+
+
+//commitしたあとに、v1.0というtagをつける
+$ git tag v1.0
+
+//tagの一覧を見る
+$ git tag
+v1.0
+
+//tagで変更履歴を見ることができる
+$ git show v1.0
+
+//直近のcommitじゃないものにタグをつける
+$ git tag v0.9 [commit id]
+
+//tagを削除
+$ git tag -d v0.9
+</code></pre>
+
+<h3><span id="git-2">エイリアスを使う(gitコマンドを短縮して使う)</span></h3>
+
+<p><code>git checkout</code>と入力するのは長いので、<code>git co</code>とする、みたいなことができる。</p>
+
+<pre><code>$ git config --global alias.[短縮名] [コマンド]
+$ git config --global alias.co checkout
+
+//作ったエイリアス一覧を見るには
+$ git config -l
+</code></pre>
+
+<h3><span id="i-11">共有リポジトリを使って作業する</span></h3>
+
+<p>共有リポジトリsharedrepo.gitというものがあり、そこに複数人の作業者がファイルをアップしていく<br/>
+AさんはAdirディレクトリを使用<br/>
+BさんはBdirディレクトリを使用しているとする。</p>
+
+<pre><code>//共有リポジトリを作成
+mkdir sharedrepo.git
+cd sharedrepo.git/
+git init --bare  //ファイルのコミットはしない
+
+
+//Aさんの作業はまずは別（共有）のリポジトリを登録すること
+$ git remote add origin ~/sharedrepo.git
+
+//何がリモートで接続されているかは下記コマンドで確認
+$ git config -l
+</code></pre>
+
+<p>共有リポジトリにpushする</p>
+
+<pre><code>//originにmasterの内容をpushする
+$ git push origin master
+</code></pre>
+
+<p>Bさんが共有リポジトリの中身をBdirディレクトリに持ってくる</p>
+
+<pre><code>$ git clone ~/sharedrepo.git/ Bdir
+</code></pre>
+
+<p>Bさんがファイルを変更して共有リポジトリにアップしたあとに、<br/>
+Aさんが変更されたファイルを自分の作業エリアに引っ張ってくる</p>
+
+<pre><code>$ git pull origin master
+</code></pre>
+
+<h3><span id="i-12">その他便利なコマンド</span></h3>
+
+<h4><span id="git_rebase">便利なマージ方法(git rebase)</span></h4>
+
+<p>ブランチを使用して修正をしていった際、最終的にマージして統合することになるかと思いますが、rebaseを使用すると履歴を一本化できる。<br/>
+ブランチで分岐させて開発したのではなく、最初からmasterでだけ開発していたかのような履歴の残り方になるイメージ。</p>
+
+<p>mergeの場合はあくまで分岐して統合された状態。</p>
+
+<pre><code>//hogeの内容をmasterに移動させるため、まずはhogeにチェックアウト
+$ git checkout hoge
+*hoge
+ master
+
+//masterにrebaseする
+$git rebase master
+</code></pre>
+
+<h4><span id="i-13">相対リファレンス</span></h4>
+
+<p>ブランチを使用して作業をしていると、前のコミットに戻りたいという場合、あるコミットからの相対位置で指定することができる。</p>
+
+<p>・一つずつ上に移動する<sup>カレット</sup><br/>
+・複数回上に移動する~num<br/>
+HEADは現在使用しているブランチの先頭。このHEADを移動することで使用するブランチを変更する。</p>
+
+<p>masterブランチをHEADより親３世代前へ移動する</p>
+
+<pre><code>git branch -f master HEAD~3
+</code></pre>
+
+<h2><span id="i-14">参考になる学習サイト</span></h2>
+
+<p>まだまだたくさんコマンドがあるので、参考になるサイトを下記に列挙します！</p>
+
+<p><a href="http://dotinstall.com/lessons/basic_git">git入門</a><br/>
+<a href="http://pcottle.github.io/learnGitBranching/">LearnGitBranching</a><br/>
+<a href="http://www.backlog.jp/git-guide/">サルでもわかるGit入門</a></p>
 ]]></content>
   </entry>
   

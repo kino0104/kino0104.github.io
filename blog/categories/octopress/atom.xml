@@ -4,7 +4,7 @@
   <title><![CDATA[Category: octopress | プログラミングしたり。]]></title>
   <link href="http://kino0104.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://kino0104.github.io/"/>
-  <updated>2015-04-01T21:55:57+09:00</updated>
+  <updated>2015-04-10T23:22:36+09:00</updated>
   <id>http://kino0104.github.io/</id>
   <author>
     <name><![CDATA[kino0104]]></name>
@@ -141,7 +141,7 @@ octopress1.pngをここに保存しておきます。</p>
 <p>公式(<a href="http://octopress.org/docs/plugins/image-tag/">Image Tag</a>)では、
 下記の書き方が紹介されています。</p>
 
-<pre><code><img class="[class names]" src="/path/to/image" title="[width] [height] [title text [alt text]]" >
+<pre><code>{% img [class names] /path/to/image [width] [height] [title text [alt text]] %}
 </code></pre>
 
 <p>また、画像の指定は、相対指定と絶対指定があります。
@@ -155,18 +155,14 @@ octopress1.pngをここに保存しておきます。</p>
 
 <p>最後にデプロイして、記事投稿完了です。
 途中、Githubのユーザ名とパスワードを入力する必要があります。
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>bundle exec rake deploy&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;h2&gt;Pushing generated _deploy website&lt;/h2&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;Username for &lsquo;&lt;a href="https://github.com"&gt;https://github.com&lt;/a&gt;&rsquo;:
-</span><span class='line'>Password for &lsquo;&lt;a href="https://username@github.com"&gt;https://username@github.com&lt;/a&gt;&rsquo;:</span></code></pre></td></tr></table></div></figure></p>
+&#8220;`
+bundle exec rake deploy</p>
+
+<h2>Pushing generated _deploy website</h2>
+
+<p>Username for &lsquo;<a href="https://github.com">https://github.com</a>&rsquo;:
+Password for &lsquo;<a href="https://username@github.com">https://username@github.com</a>&rsquo;:
+&#8220;`</p>
 
 <p>簡単ではありますが、Octopressでのブログ作成手順でした。
 不明点や間違いがありましたら、コメントいただければと思います。</p>

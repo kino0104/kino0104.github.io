@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: wget | プログラミングしたり。]]></title>
+  <link href="http://kino0104.github.io/blog/categories/wget/atom.xml" rel="self"/>
+  <link href="http://kino0104.github.io/"/>
+  <updated>2015-04-10T23:22:36+09:00</updated>
+  <id>http://kino0104.github.io/</id>
+  <author>
+    <name><![CDATA[kino0104]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[yumやwgetをプロキシサーバ経由で使用する]]></title>
+    <link href="http://kino0104.github.io/blog/2015/04/10/proxy-yum-wget/"/>
+    <updated>2015-04-10T22:59:58+09:00</updated>
+    <id>http://kino0104.github.io/blog/2015/04/10/proxy-yum-wget</id>
+    <content type="html"><![CDATA[<p>社内でサーバを立てていて、wgetとかyumとかで色々インストールしようと思ったら、ダウンロードできませんでした。
+まぁ、プロキシサーバがあるので、プロキシ経由で使用できるように設定が必要なのは当然なのですが、
+今回は設定方法の紹介です。</p>
+
+<!-- more -->
+
+
+<h2>wgetの設定</h2>
+
+<p>まずは下記コマンドを実行します。
+※なければnew fileとして作成
+<code>
+vi ~/.wgetrc
+</code></p>
+
+<p>そして、下記内容を記述します。
+&#8220;`~/.wgetrc
+http_proxy=<a href="http://%E3%83%97%E3%83%AD%E3%82%AD%E3%82%B7%E3%82%B5%E3%83%BC%E3%83%90:%E3%83%9D%E3%83%BC%E3%83%88%E7%95%AA%E5%8F%B7">http://%E3%83%97%E3%83%AD%E3%82%AD%E3%82%B7%E3%82%B5%E3%83%BC%E3%83%90:%E3%83%9D%E3%83%BC%E3%83%88%E7%95%AA%E5%8F%B7</a></p>
+
+<p>//認証が必要であれば下記も記述する
+proxy_user=username
+proxy_password=password
+&#8220;`</p>
+
+<h2>yumの設定</h2>
+
+<p>下記コマンドを実行します。</p>
+
+<pre><code>vi /etc/yum.conf
+</code></pre>
+
+<pre><code class="/etc/yum.conf">proxy=http://プロキシサーバ:ポート番号
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>

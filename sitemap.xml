@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://kino0104.github.io/blog/2015/04/10/proxy-yum-wget/</loc>
+    <lastmod>2015-04-10T22:59:58+09:00</lastmod>
+  </url>
+  <url>
     <loc>http://kino0104.github.io/blog/2015/04/01/apache-mimetype-xlsx/</loc>
     <lastmod>2015-04-01T21:43:22+09:00</lastmod>
   </url>
@@ -17,16 +21,23 @@
     <lastmod>2015-03-26T19:56:55+09:00</lastmod>
   </url>
   <url>
+    <loc>http://kino0104.github.io/tool/git-command/</loc>
+    <lastmod>2015-03-02T05:40:57+09:00</lastmod>
+  </url>
+  <url>
     <loc>http://kino0104.github.io/blog/archives/</loc>
   </url>
   <url>
     <loc>http://kino0104.github.io/</loc>
   </url>
   <url>
-    <loc>http://kino0104.github.io/blog/categories/octopress/</loc>
+    <loc>http://kino0104.github.io/blog/categories/git/</loc>
   </url>
   <url>
-    <loc>http://kino0104.github.io/blog/categories/git/</loc>
+    <loc>http://kino0104.github.io/blog/categories/tool/</loc>
+  </url>
+  <url>
+    <loc>http://kino0104.github.io/blog/categories/octopress/</loc>
   </url>
   <url>
     <loc>http://kino0104.github.io/blog/categories/bookreview/</loc>
@@ -39,5 +50,11 @@
   </url>
   <url>
     <loc>http://kino0104.github.io/blog/categories/linux/</loc>
+  </url>
+  <url>
+    <loc>http://kino0104.github.io/blog/categories/yum/</loc>
+  </url>
+  <url>
+    <loc>http://kino0104.github.io/blog/categories/wget/</loc>
   </url>
 </urlset>
