@@ -4,7 +4,7 @@
   <title><![CDATA[Category: git | プログラミングしたり。]]></title>
   <link href="http://kino0104.github.io/blog/categories/git/atom.xml" rel="self"/>
   <link href="http://kino0104.github.io/"/>
-  <updated>2015-04-10T23:52:37+09:00</updated>
+  <updated>2015-04-11T00:00:36+09:00</updated>
   <id>http://kino0104.github.io/</id>
   <author>
     <name><![CDATA[kino0104]]></name>
@@ -54,7 +54,18 @@
     <link href="http://kino0104.github.io/tool/git-command/"/>
     <updated>2015-03-02T05:40:57+09:00</updated>
     <id>http://kino0104.github.io/tool/git-command</id>
-    <content type="html"><![CDATA[<div id="toc_container" class="toc_transparent no_bullets">
+    <content type="html"><![CDATA[<p>Gitはファイルを作成したり、変更したりしたときの履歴をバージョン管理できます。<br/>
+以下、3つのエリアを用いて管理していきます。
+1.作業ディレクトリ<br/>
+2.ステージングエリア<br/>
+3.リポジトリ</p>
+
+<!-- more -->
+
+
+
+
+<div id="toc_container" class="toc_transparent no_bullets">
   <p class="toc_title">
     - 目次 -
   </p>
@@ -133,12 +144,6 @@
 </div>
 
 
-<p>Gitはファイルを作成したり、変更したりしたときの履歴をバージョン管理できる。<br/>
-以下、3つのエリアを用いて管理していく<br/>
-1.作業ディレクトリ<br/>
-2.ステージングエリア<br/>
-3.リポジトリ</p>
-
 <h2><span id="i">インストールする</span></h2>
 
 <pre><code>$ yum install git
@@ -147,14 +152,14 @@
 <h2><span id="i-2">使う前の設定</span></h2>
 
 <p>使用始める前に、user名とemailの設定する必要があるので、<br/>
-下記コマンドから登録する</p>
+下記コマンドから登録します。</p>
 
 <pre><code>git config --global user.name "user名"
 git config --global user.email "mail adress"
 git config --global color.ui true
 </code></pre>
 
-<p>上記設定内容は下記のコマンドで確認できる</p>
+<p>上記設定内容は下記のコマンドで確認できます。</p>
 
 <pre><code>git config -l
 </code></pre>
@@ -163,7 +168,7 @@ git config --global color.ui true
 
 <h3><span id="git">gitを使用する作業ディレクトリを決める。</span></h3>
 
-<p>この作業ディレクトリ内に作ったディレクトリやファイルが管理対象となる。</p>
+<p>この作業ディレクトリ内に作ったディレクトリやファイルが管理対象となります。</p>
 
 <pre><code>//作業ディレクトリdirに移動
 $ cd dir/
@@ -176,8 +181,8 @@ git init
 
 <h3><span id="git_add">ステージングエリアにアップする(git add)</span></h3>
 
-<p>作業ディレクトリにindex.htmlを作成したとする。<br/>
-これをステージングエリアにアップしてみる</p>
+<p>作業ディレクトリにindex.htmlを作成したとします。
+これをステージングエリアにアップしてみます。</p>
 
 <pre><code>//index.htmlをアップする
 $ git add index.html
@@ -190,7 +195,7 @@ $ git add .
 
 <p>次に、リポジトリにアップしてみよう</p>
 
-<pre><code>//実行後にメッセージを入力することになるので、変更点等を簡潔に入力する
+<pre><code>//実行後にメッセージを入力することになるので、変更点等を簡潔に入力します。
 $ git commit
 
 //メッセージが簡単に書いてcommitする
@@ -199,8 +204,8 @@ $ git commit -m "index.html modified"
 
 <h3><span id="git_log">アップした履歴を見る(git log)</span></h3>
 
-<p>今、ステージングエリアとリポジトリにファイルをアップした。<br/>
-その履歴を見てみる。</p>
+<p>今、ステージングエリアとリポジトリにファイルをアップしました。<br/>
+その履歴を見てみます。</p>
 
 <pre><code>$ git log
 
@@ -218,8 +223,8 @@ $ git log -stat
 
 <p>ファイルを作成したり、修正したりして、<br/>
 今、index.htmlはステージングエリアにアップしてたっけ？<br/>
-リポジトリにアップしたっけ？とわからなくなることがある。<br/>
-そんなときは、現在の状態を確認するコマンドを入力する。</p>
+リポジトリにアップしたっけ？とわからなくなることがあります。<br/>
+そんなときは、現在の状態を確認するコマンドを入力します。</p>
 
 <pre><code>$ git status
 
@@ -234,7 +239,7 @@ $ git log -stat
 
 <h3><span id="git_diff">差分を確認する(git diff)</span></h3>
 
-<p>ファイルの差分を確認する。</p>
+<p>ファイルの差分を確認します。</p>
 
 <pre><code>//ステージに上がっていないファイルの変更点を確認
 $ git diff
@@ -243,7 +248,7 @@ $ git diff
 $ git diff --cached
 </code></pre>
 
-<p>ファイルを操作する(削除や移動など)</p>
+<p>ファイルを操作します(削除や移動など)</p>
 
 <pre><code>//移動
 $ git mv index.html
@@ -253,9 +258,9 @@ $ git rm index.html
 
 <h3><span id="i-4">管理下に含めたくないファイル</span></h3>
 
-<p>git管理下となった作業ディレクトリでも管理したくないファイルがあると言ったときは「.gitignore」を使用する。</p>
+<p>git管理下となった作業ディレクトリでも管理したくないファイルがあると言ったときは「.gitignore」を使用します。</p>
 
-<p>.gitignoreを置いたディレクトリ及び配下のディレクトリが適用対象になる。</p>
+<p>.gitignoreを置いたディレクトリ及び配下のディレクトリが適用対象になります。</p>
 
 <pre><code>$ vi .gitignore
 
@@ -274,9 +279,9 @@ $ git commit --amend
 
 <h3><span id="i-6">過去のバージョンから戻る</span></h3>
 
-<p>resetとrevertがある。<br/>
+<p>resetとrevertがあります。<br/>
 resetはなかったことにする。revertは巻き戻すというイメージ。<br/>
-resetは履歴に残らないが、revertは履歴に残る。</p>
+resetは履歴に残らないが、revertは履歴に残ります。</p>
 
 <pre><code>// git addしたあとに一つ前の状態に戻る
 $ git reset --hard HEAD
@@ -296,7 +301,7 @@ git revert HEAD
 <h3><span id="i-7">ブランチ(分岐)を使う</span></h3>
 
 <p>初めはmasterしかない。<br/>
-ちょっとコードを変えて試してみたいときに、大元のmasterブランチで作業するのではなく、もう一つブランチを作成して、そちらでコードを修正する。良い感じのコードが書ければ、あとからmasterブランチに統合するといった使い方をする。</p>
+ちょっとコードを変えて試してみたいときに、大元のmasterブランチで作業するのではなく、もう一つブランチを作成して、そちらでコードを修正する。良い感じのコードが書ければ、あとからmasterブランチに統合するといった使い方をします。</p>
 
 <pre><code>$ git branch
 * master
@@ -330,9 +335,9 @@ $ git branch -d hoge
 <h3><span id="i-9">マージの衝突を解決する</span></h3>
 
 <p>衝突とは、ブランチ1でindex.htmlを編集し、commitしたあと、<br/>
-masterブランチでもindex.htmlを編集し、commitをした。<br/>
-そのあと、ブランチ1をマージしようとした。というケース<br/>
-異なるブランチで同じファイルが修正されているため、どちらのコードを正とするのか決める必要がある。</p>
+masterブランチでもindex.htmlを編集し、commit。<br/>
+そのあと、ブランチ1をマージしようとした。というケースです。
+異なるブランチで同じファイルが修正されているため、どちらのコードを正とするのか決める必要があります。</p>
 
 <pre><code>//衝突が起きたファイルをviコマンドで開き、必要なコードだけを残し、保存する
 $ vi index.html
@@ -340,8 +345,8 @@ $ vi index.html
 
 <h3><span id="i-10">タグを使う</span></h3>
 
-<p>タグと言うものをつけて、履歴を管理することもできる。<br/>
-git logで見たときにcommit d96bc437694&#8230;.というidでも色々操作できるがわかりにくい</p>
+<p>タグと言うものをつけて、履歴を管理することもできます。<br/>
+git logで見たときにcommit d96bc437694&#8230;.というidでも色々操作できるがわかりにくいですよね。</p>
 
 <pre><code>commit d96bc43769409df0aa9b46614fe2a0a23b9ca5dc //これわかりにくい
 Author: user名 &lt;mail address&gt;
@@ -369,7 +374,7 @@ $ git tag -d v0.9
 
 <h3><span id="git-2">エイリアスを使う(gitコマンドを短縮して使う)</span></h3>
 
-<p><code>git checkout</code>と入力するのは長いので、<code>git co</code>とする、みたいなことができる。</p>
+<p><code>git checkout</code>と入力するのは長いので、<code>git co</code>とする、みたいなことができます。</p>
 
 <pre><code>$ git config --global alias.[短縮名] [コマンド]
 $ git config --global alias.co checkout
@@ -380,9 +385,9 @@ $ git config -l
 
 <h3><span id="i-11">共有リポジトリを使って作業する</span></h3>
 
-<p>共有リポジトリsharedrepo.gitというものがあり、そこに複数人の作業者がファイルをアップしていく<br/>
+<p>共有リポジトリsharedrepo.gitというものがあり、そこに複数人の作業者がファイルをアップしていきます。
 AさんはAdirディレクトリを使用<br/>
-BさんはBdirディレクトリを使用しているとする。</p>
+BさんはBdirディレクトリを使用しているものとします。</p>
 
 <pre><code>//共有リポジトリを作成
 mkdir sharedrepo.git
@@ -397,19 +402,19 @@ $ git remote add origin ~/sharedrepo.git
 $ git config -l
 </code></pre>
 
-<p>共有リポジトリにpushする</p>
+<p>共有リポジトリにpush</p>
 
 <pre><code>//originにmasterの内容をpushする
 $ git push origin master
 </code></pre>
 
-<p>Bさんが共有リポジトリの中身をBdirディレクトリに持ってくる</p>
+<p>Bさんが共有リポジトリの中身をBdirディレクトリに持っていきます。</p>
 
 <pre><code>$ git clone ~/sharedrepo.git/ Bdir
 </code></pre>
 
 <p>Bさんがファイルを変更して共有リポジトリにアップしたあとに、<br/>
-Aさんが変更されたファイルを自分の作業エリアに引っ張ってくる</p>
+Aさんが変更されたファイルを自分の作業エリアに引っ張ってくる。</p>
 
 <pre><code>$ git pull origin master
 </code></pre>
@@ -434,13 +439,13 @@ $git rebase master
 
 <h4><span id="i-13">相対リファレンス</span></h4>
 
-<p>ブランチを使用して作業をしていると、前のコミットに戻りたいという場合、あるコミットからの相対位置で指定することができる。</p>
+<p>ブランチを使用して作業をしていると、前のコミットに戻りたいという場合、あるコミットからの相対位置で指定することができます。</p>
 
 <p>・一つずつ上に移動する<sup>カレット</sup><br/>
 ・複数回上に移動する~num<br/>
-HEADは現在使用しているブランチの先頭。このHEADを移動することで使用するブランチを変更する。</p>
+HEADは現在使用しているブランチの先頭。このHEADを移動することで使用するブランチを変更します。</p>
 
-<p>masterブランチをHEADより親３世代前へ移動する</p>
+<p>masterブランチをHEADより親３世代前へ移動します</p>
 
 <pre><code>git branch -f master HEAD~3
 </code></pre>
