@@ -4,7 +4,7 @@
   <title><![CDATA[プログラミングしたり。]]></title>
   <link href="http://kino0104.github.io/atom.xml" rel="self"/>
   <link href="http://kino0104.github.io/"/>
-  <updated>2015-04-01T22:56:10+09:00</updated>
+  <updated>2015-04-10T23:52:37+09:00</updated>
   <id>http://kino0104.github.io/</id>
   <author>
     <name><![CDATA[kino0104]]></name>
@@ -12,6 +12,57 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[yumやwgetをプロキシサーバ経由で使用する]]></title>
+    <link href="http://kino0104.github.io/blog/2015/04/10/proxy-yum-wget/"/>
+    <updated>2015-04-10T22:59:58+09:00</updated>
+    <id>http://kino0104.github.io/blog/2015/04/10/proxy-yum-wget</id>
+    <content type="html"><![CDATA[<p>社内でサーバを立てていて、wgetとかyumとかで色々インストールしようと思ったら、ダウンロードできませんでした。
+まぁ、プロキシサーバがあるので、プロキシ経由で使用できるように設定が必要なのは当然なのですが、
+今回は設定方法の紹介です。</p>
+
+<!-- more -->
+
+
+<h2>wgetの設定</h2>
+
+<p>まずは下記コマンドを実行します。
+※なければnew fileとして作成</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>vi ~/.wgetrc</span></code></pre></td></tr></table></div></figure>
+
+
+<p>そして、下記内容を記述します。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>http_proxy=http://プロキシサーバ:ポート番号
+</span><span class='line'>
+</span><span class='line'>//認証が必要であれば下記も記述する
+</span><span class='line'>proxy_user=username
+</span><span class='line'>proxy_password=password</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>yumの設定</h2>
+
+<p>下記コマンドを実行します。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>vi /etc/yum.conf</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>proxy=http://プロキシサーバ:ポート番号</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[xlsxファイルをダウンロードしようとしたらzipがダウンロードされた]]></title>
