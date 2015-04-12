@@ -4,7 +4,7 @@
   <title><![CDATA[プログラミングしたり。]]></title>
   <link href="http://kino0104.github.io/atom.xml" rel="self"/>
   <link href="http://kino0104.github.io/"/>
-  <updated>2015-04-11T00:00:36+09:00</updated>
+  <updated>2015-04-12T23:05:56+09:00</updated>
   <id>http://kino0104.github.io/</id>
   <author>
     <name><![CDATA[kino0104]]></name>
@@ -12,6 +12,97 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[配列関連のアルゴリズム]]></title>
+    <link href="http://kino0104.github.io/blog/2015/04/12/algorithm-array/"/>
+    <updated>2015-04-12T22:46:29+09:00</updated>
+    <id>http://kino0104.github.io/blog/2015/04/12/algorithm-array</id>
+    <content type="html"><![CDATA[<p>アルゴリズムの勉強をするために、<a href="http://www.amazon.co.jp/%E3%80%8C%E3%82%A2%E3%83%AB%E3%82%B4%E3%83%AA%E3%82%BA%E3%83%A0%E3%80%8D%E3%81%AE%E3%82%AD%E3%83%9B%E3%83%B3-%E3%82%A4%E3%83%81%E3%83%90%E3%83%B3%E3%82%84%E3%81%95%E3%81%97%E3%81%84%E7%90%86%E5%B7%A5%E7%B3%BB%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA-%E6%9D%89%E6%B5%A6-%E8%B3%A2/dp/4797360690">「アルゴリズム」のキホン</a>という本を読んでいます。
+わかりやすい本なのでアルゴリズムを学び始めるのよいかなと思います。</p>
+
+<p>本の中では、言葉と図によって、アルゴリズムが説明されていますので、
+PHPのコードを記述して自分の中にしっかりと落とし込んでいきたいと思います。</p>
+
+<!-- more -->
+
+
+<h2>配列データの要素数を求める</h2>
+
+<p>PHPですと、count()関数を使用することによって、
+ほしい情報を得ることができますが、考え方を理解することも重要かと思います。</p>
+
+<p>配列データの最後に番兵データを格納することで要素数を数える方法が紹介されていました。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>//数を数えたい配列
+</span><span class='line'>$arr = array(20, 5, 60, 48, 12, 30);
+</span><span class='line'>
+</span><span class='line'>//番兵データとして、配列データになり得ない値を配列の最後に格納
+</span><span class='line'>$arr[] = -1;
+</span><span class='line'>
+</span><span class='line'>//要素数を数えるための変数countを値0で初期化する
+</span><span class='line'>$count = 0
+</span><span class='line'>
+</span><span class='line'>//番兵データと等しくなるまで変数countをカウントアップする
+</span><span class='line'>for($i=0;$arr[$i]!=-1;$i++){
+</span><span class='line'>  $count++;
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>echo $count;
+</span><span class='line'>//出力結果:6</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>配列データ内の最大値を求める</h2>
+
+<p>配列データ内の最大値の求め方は、最大値を保持する変数を用意して、配列内のデータを順番に比較していきます。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>//配列arr内の最大値を求める
+</span><span class='line'>$arr = array(20, 5, 60, 48, 12, 30);
+</span><span class='line'>
+</span><span class='line'>//最大値を保持する変数を用意する。このとき、対象データが取りうる値よりも小さい値で初期化
+</span><span class='line'>$max = -1;
+</span><span class='line'>//配列データと最大値保持変数maxを比べて、配列データが大きかった場合、その値を$maxに格納する
+</span><span class='line'>for($i=0;$i&lt;count($arr);$i++){
+</span><span class='line'>  if($arr[$i] &gt; $max){
+</span><span class='line'>      $max = $arr[$i];
+</span><span class='line'>  }
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>echo $max;
+</span><span class='line'>//出力結果:60</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[yumやwgetをプロキシサーバ経由で使用する]]></title>
