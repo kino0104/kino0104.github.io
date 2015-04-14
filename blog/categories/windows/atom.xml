@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: windows | プログラミングしたり。]]></title>
+  <link href="http://kino0104.github.io/blog/categories/windows/atom.xml" rel="self"/>
+  <link href="http://kino0104.github.io/"/>
+  <updated>2015-04-14T21:33:31+09:00</updated>
+  <id>http://kino0104.github.io/</id>
+  <author>
+    <name><![CDATA[kino0104]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[WindowsでVagrantを使用する]]></title>
+    <link href="http://kino0104.github.io/blog/2015/04/14/vagrant-windows/"/>
+    <updated>2015-04-14T21:21:56+09:00</updated>
+    <id>http://kino0104.github.io/blog/2015/04/14/vagrant-windows</id>
+    <content type="html"><![CDATA[<p>Windowsで、かつプロキシ環境下でVagrantを使用するまでの手順です。</p>
+
+<!-- more -->
+
+
+<h2>VirtualBoxをインストール</h2>
+
+<p>VirtualBoxの<a href="https://www.virtualbox.org/wiki/Downloads">ダウンロードページ</a>よりインストールします。</p>
+
+<h2>Vagrantをインストール</h2>
+
+<p>Vagrantの<a href="https://www.vagrantup.com/downloads.html">ダウンロードページ</a>より
+インストールします。</p>
+
+<h2>Boxをダウンロードする</h2>
+
+<p>Boxとは、仮想マシンのテンプレートのことですが、
+これをコマンドプロンプトからダウンロードします。</p>
+
+<p>プロキシ環境下の場合は、http_proxyとhttps_proxyに&#8221;プロキシサーバ:ポート番号&#8221;を記述します。</p>
+
+<p>下記のように、コマンドプロンプト上でコマンドを入力します。（プロキシサーバとポートは自身の環境に合わせてください）
+※コマンドプロンプトを閉じると、下記設定は無効になります。</p>
+
+<pre><code>set http_proxy="http://proxy.example.com:80"
+set https_proxy="http://proxy.example.com:80"
+</code></pre>
+
+<p>次に、Boxをダウンロードします。</p>
+
+<pre><code>vagrant box add centos64box http://developer.nrel.gov/downloads/vagrant-boxes/CentOS-6.4-x86_64-v20130731.box
+</code></pre>
+
+<h1>仮想マシンを立ち上げる</h1>
+
+<p>ダウンロードが完了したら、仮想マシンを動かしたいフォルダに移動しましょう。</p>
+
+<p>移動後に、<code>vagrantfile</code>という設定ファイルを作成するために下記コマンドを入力します。</p>
+
+<pre><code>vagrant init centos64box
+</code></pre>
+
+<p><code>vagrantfile</code>をテキストエディタで開き、private_networkと書かれたところを検索します。
+ip：&#8221;192.168.33.10&#8221;と書いてある行の#を削除します。</p>
+
+<pre><code>  # Create a private network, which allows host-only access to the machine
+  # using a specific IP.
+   config.vm.network "private_network", ip: "192.168.33.10" //この行の#を削除
+</code></pre>
+
+<p>次に、下記コマンドで仮想マシンを起動します。</p>
+
+<pre><code>vagrant up
+</code></pre>
+
+<h2>仮想マシンに接続する</h2>
+
+<p>先ほど、<code>vagrantfile</code>の設定で、<code>ip: "192.168.33.10"</code>を有効にしました。
+私の環境では、TeraTermというソフトが入っていますので、このソフトを用いてssh接続します。
+（ssh接続できれば他のソフトでも大丈夫かと思います。）</p>
+
+<p>TeraTermでホスト欄に<code>192.168.33.10</code>を入力します。
+ユーザ名とパスワードは<code>vagrant</code>でログインすることができます。</p>
+
+<p>ここまででVagrantを使用できる環境になりましたので、
+この後、Apacheだとかを色々インストールして使ってみてください。</p>
+
+<p>以上、簡単ではありますが、
+Windows環境でVagrantを使用する手順をご紹介しました。</p>
+]]></content>
+  </entry>
+  
+</feed>

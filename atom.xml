@@ -4,7 +4,7 @@
   <title><![CDATA[プログラミングしたり。]]></title>
   <link href="http://kino0104.github.io/atom.xml" rel="self"/>
   <link href="http://kino0104.github.io/"/>
-  <updated>2015-04-12T23:09:57+09:00</updated>
+  <updated>2015-04-14T21:33:31+09:00</updated>
   <id>http://kino0104.github.io/</id>
   <author>
     <name><![CDATA[kino0104]]></name>
@@ -12,6 +12,91 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[WindowsでVagrantを使用する]]></title>
+    <link href="http://kino0104.github.io/blog/2015/04/14/vagrant-windows/"/>
+    <updated>2015-04-14T21:21:56+09:00</updated>
+    <id>http://kino0104.github.io/blog/2015/04/14/vagrant-windows</id>
+    <content type="html"><![CDATA[<p>Windowsで、かつプロキシ環境下でVagrantを使用するまでの手順です。</p>
+
+<!-- more -->
+
+
+<h2>VirtualBoxをインストール</h2>
+
+<p>VirtualBoxの<a href="https://www.virtualbox.org/wiki/Downloads">ダウンロードページ</a>よりインストールします。</p>
+
+<h2>Vagrantをインストール</h2>
+
+<p>Vagrantの<a href="https://www.vagrantup.com/downloads.html">ダウンロードページ</a>より
+インストールします。</p>
+
+<h2>Boxをダウンロードする</h2>
+
+<p>Boxとは、仮想マシンのテンプレートのことですが、
+これをコマンドプロンプトからダウンロードします。</p>
+
+<p>プロキシ環境下の場合は、http_proxyとhttps_proxyに&#8221;プロキシサーバ:ポート番号&#8221;を記述します。</p>
+
+<p>下記のように、コマンドプロンプト上でコマンドを入力します。（プロキシサーバとポートは自身の環境に合わせてください）
+※コマンドプロンプトを閉じると、下記設定は無効になります。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>set http_proxy="http://proxy.example.com:80"
+</span><span class='line'>set https_proxy="http://proxy.example.com:80"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>次に、Boxをダウンロードします。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>vagrant box add centos64box http://developer.nrel.gov/downloads/vagrant-boxes/CentOS-6.4-x86_64-v20130731.box</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>仮想マシンを立ち上げる</h1>
+
+<p>ダウンロードが完了したら、仮想マシンを動かしたいフォルダに移動しましょう。</p>
+
+<p>移動後に、<code>vagrantfile</code>という設定ファイルを作成するために下記コマンドを入力します。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>vagrant init centos64box</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>vagrantfile</code>をテキストエディタで開き、private_networkと書かれたところを検索します。
+ip：&#8221;192.168.33.10&#8221;と書いてある行の#を削除します。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>  # Create a private network, which allows host-only access to the machine
+</span><span class='line'>  # using a specific IP.
+</span><span class='line'>   config.vm.network "private_network", ip: "192.168.33.10" //この行の#を削除</span></code></pre></td></tr></table></div></figure>
+
+
+<p>次に、下記コマンドで仮想マシンを起動します。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>vagrant up</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>仮想マシンに接続する</h2>
+
+<p>先ほど、<code>vagrantfile</code>の設定で、<code>ip: "192.168.33.10"</code>を有効にしました。
+私の環境では、TeraTermというソフトが入っていますので、このソフトを用いてssh接続します。
+（ssh接続できれば他のソフトでも大丈夫かと思います。）</p>
+
+<p>TeraTermでホスト欄に<code>192.168.33.10</code>を入力します。
+ユーザ名とパスワードは<code>vagrant</code>でログインすることができます。</p>
+
+<p>ここまででVagrantを使用できる環境になりましたので、
+この後、Apacheだとかを色々インストールして使ってみてください。</p>
+
+<p>以上、簡単ではありますが、
+Windows環境でVagrantを使用する手順をご紹介しました。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[配列関連のアルゴリズム]]></title>
