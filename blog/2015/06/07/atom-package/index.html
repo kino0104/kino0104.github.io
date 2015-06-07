@@ -5,13 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>配列関連のアルゴリズム - プログラミングしたり。</title>
+  <title>Atomでパッケージ管理 - プログラミングしたり。</title>
   <meta name="author" content="kino0104">
 
   
-  <meta name="description" content="アルゴリズムの勉強をするために、「アルゴリズム」のキホンという本を読んでいます。
-わかりやすい本なのでアルゴリズムを学び始めるのよいかなと思います。 本の中では、言葉と図によって、アルゴリズムが説明されていますので、
-PHPのコードを記述して自分の中にしっかりと落とし込んでいきたいと思います。 &hellip;">
+  <meta name="description" content="最近、Atomを使用するようになりました。
+いくつかパッケージをインストールしてみたりしたのですが、他の環境でAtomを使用するようになったときのことを考えてパッケージ管理をどのようにできるのか調べてみました。 Atomでは、パッケージをStarというもので管理することができます。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +19,7 @@ PHPのコードを記述して自分の中にしっかりと落とし込んで�
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://kino0104.github.io/blog/2015/04/12/algorithm-array/">
+  <link rel="canonical" href="http://kino0104.github.io/blog/2015/06/07/atom-package/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="プログラミングしたり。" type="application/atom+xml">
@@ -82,7 +81,7 @@ PHPのコードを記述して自分の中にしっかりと落とし込んで�
   
   <header>
     
-      <h1 class="entry-title">配列関連のアルゴリズム</h1>
+      <h1 class="entry-title">Atomでパッケージ管理</h1>
     
     
       <p class="meta">
@@ -91,99 +90,54 @@ PHPのコードを記述して自分の中にしっかりと落とし込んで�
 
 
 
-<time class='entry-date' datetime='2015-04-12T22:46:29+09:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>10:46 pm</span></time>
+<time class='entry-date' datetime='2015-06-07T21:20:29+09:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>7</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>9:20 pm</span></time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>アルゴリズムの勉強をするために、<a href="http://www.amazon.co.jp/%E3%80%8C%E3%82%A2%E3%83%AB%E3%82%B4%E3%83%AA%E3%82%BA%E3%83%A0%E3%80%8D%E3%81%AE%E3%82%AD%E3%83%9B%E3%83%B3-%E3%82%A4%E3%83%81%E3%83%90%E3%83%B3%E3%82%84%E3%81%95%E3%81%97%E3%81%84%E7%90%86%E5%B7%A5%E7%B3%BB%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA-%E6%9D%89%E6%B5%A6-%E8%B3%A2/dp/4797360690">「アルゴリズム」のキホン</a>という本を読んでいます。
-わかりやすい本なのでアルゴリズムを学び始めるのよいかなと思います。</p>
-
-<p>本の中では、言葉と図によって、アルゴリズムが説明されていますので、
-PHPのコードを記述して自分の中にしっかりと落とし込んでいきたいと思います。</p>
+<div class="entry-content"><p>最近、Atomを使用するようになりました。
+いくつかパッケージをインストールしてみたりしたのですが、他の環境でAtomを使用するようになったときのことを考えてパッケージ管理をどのようにできるのか調べてみました。</p>
 
 <!-- more -->
 
 
-<h2>配列データの要素数を求める</h2>
+<p>Atomでは、パッケージをStarというもので管理することができます。
+気に入ったパッケージにStarという目印をつけておくことができるものですが、インストールして使用しているパッケージにこのStarをつけておきます。このStarをつけたものだけをインストールすることがコマンドで簡単に実行できます。</p>
 
-<p>PHPですと、count()関数を使用することによって、
-ほしい情報を得ることができますが、考え方を理解することも重要かと思います。</p>
+<p>Starを使用するためには、<a href="https://atom.io/">Atom</a>にアクセスして、
+Sign inする必要があります。
+Sign in後に自分のページに行くと、API tokenという値が記載されていますので、copyします。</p>
 
-<p>配列データの最後に番兵データを格納することで要素数を数える方法が紹介されていました。</p>
+<p>また、ターミナルからatomのパッケージなどをインストールできるので、Atomエディタを開き、メニューバーの[Atom] > [Install Shell Commands]からatomコマンドとapmコマンドをインストールしておくと便利です。</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>//数を数えたい配列
-</span><span class='line'>$arr = array(20, 5, 60, 48, 12, 30);
-</span><span class='line'>
-</span><span class='line'>//番兵データとして、配列データになり得ない値を配列の最後に格納
-</span><span class='line'>$arr[] = -1;
-</span><span class='line'>
-</span><span class='line'>//要素数を数えるための変数countを値0で初期化する
-</span><span class='line'>$count = 0
-</span><span class='line'>
-</span><span class='line'>//番兵データと等しくなるまで変数countをカウントアップする
-</span><span class='line'>for($i=0;$arr[$i]!=-1;$i++){
-</span><span class='line'>  $count++;
-</span><span class='line'>}
-</span><span class='line'>
-</span><span class='line'>echo $count;
-</span><span class='line'>//出力結果:6</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>配列データ内の最大値を求める</h2>
-
-<p>配列データ内の最大値の求め方は、最大値を保持する変数を用意して、配列内のデータを順番に比較していきます。</p>
+<p>ターミナルでatom関連のコマンドが実行できるようになったら、下記コマンドでstarをつけます。</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>//配列arr内の最大値を求める
-</span><span class='line'>$arr = array(20, 5, 60, 48, 12, 30);
-</span><span class='line'>
-</span><span class='line'>//最大値を保持する変数を用意する。このとき、対象データが取りうる値よりも小さい値で初期化
-</span><span class='line'>$max = -1;
-</span><span class='line'>//配列データと最大値保持変数maxを比べて、配列データが大きかった場合、その値を$maxに格納する
-</span><span class='line'>for($i=0;$i&lt;count($arr);$i++){
-</span><span class='line'>  if($arr[$i] &gt; $max){
-</span><span class='line'>      $max = $arr[$i];
-</span><span class='line'>  }
-</span><span class='line'>}
-</span><span class='line'>
-</span><span class='line'>echo $max;
-</span><span class='line'>//出力結果:60</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>apm star &lt;package名&gt;</span></code></pre></td></tr></table></div></figure>
 
 
-<p>今はソートのアルゴリズムについて書かれた章を読んでいますので、
-またコードに落としていきたいと思います。</p>
+<p>Starが付いているパッケージは、Atomの自分のページで確認できますし、
+下記のコマンドでも確認可能です。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>apm stars</span></code></pre></td></tr></table></div></figure>
+
+
+<p>また、starを消したい場合は、</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>apm unstar &lt;package名&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>そして、starをつけたパッケージ全てをインストールしたい場合は、下記のように入力します。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>apm stars --install</span></code></pre></td></tr></table></div></figure>
+
+
+<p>これで、いつでもどこでもどの端末にも同じパッケージをインストールできます！</p>
 </div>
 
 
@@ -199,12 +153,12 @@ PHPのコードを記述して自分の中にしっかりと落とし込んで�
 
 
 
-<time class='entry-date' datetime='2015-04-12T22:46:29+09:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>10:46 pm</span></time>
+<time class='entry-date' datetime='2015-06-07T21:20:29+09:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>7</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>9:20 pm</span></time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/arugorizumu/'>アルゴリズム</a>
+    <a class='category' href='/blog/categories/atom/'>atom</a>
   
 </span>
 
@@ -216,20 +170,20 @@ PHPのコードを記述して自分の中にしっかりと落とし込んで�
         <li class="hatena">
           <!-- hatebu-start -->
           
-          <a href="http://b.hatena.ne.jp/entry/http://kino0104.github.io/blog/2015/04/12/algorithm-array/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+          <a href="http://b.hatena.ne.jp/entry/http://kino0104.github.io/blog/2015/06/07/atom-package/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
           
           <!-- hatebu-end -->
         </li>
         <li class="twitter">
             
                 
-                <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://kino0104.github.io/blog/2015/04/12/algorithm-array/" data-via="kino_0104" data-counturl="http://kino0104.github.io/blog/2015/04/12/algorithm-array/" >Tweet</a>
+                <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://kino0104.github.io/blog/2015/06/07/atom-package/" data-via="kino_0104" data-counturl="http://kino0104.github.io/blog/2015/06/07/atom-package/" >Tweet</a>
                 
             
         </li>
         <li class="facebook">
             
-            <div class="fb-like" data-send="false" data-layout="button_count" data-show-faces="false" data-font="verdana" data-href="http://kino0104.github.io/blog/2015/04/12/algorithm-array/"></div>
+            <div class="fb-like" data-send="false" data-layout="button_count" data-show-faces="false" data-font="verdana" data-href="http://kino0104.github.io/blog/2015/06/07/atom-package/"></div>
             
         </li>
         <li class="pocket">
@@ -244,10 +198,8 @@ PHPのコードを記述して自分の中にしっかりと落とし込んで�
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2015/04/10/proxy-yum-wget/" title="Previous Post: yumやwgetをプロキシサーバ経由で使用する">&laquo; yumやwgetをプロキシサーバ経由で使用する</a>
+        <a class="basic-alignment left" href="/blog/2015/04/14/vagrant-windows/" title="Previous Post: WindowsでVagrantを使用する">&laquo; WindowsでVagrantを使用する</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2015/04/14/vagrant-windows/" title="Next Post: WindowsでVagrantを使用する">WindowsでVagrantを使用する &raquo;</a>
       
     </p>
   </footer>
@@ -363,8 +315,8 @@ PHPのコードを記述して自分の中にしっかりと落とし込んで�
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://kino0104.github.io/blog/2015/04/12/algorithm-array/';
-        var disqus_url = 'http://kino0104.github.io/blog/2015/04/12/algorithm-array/';
+        var disqus_identifier = 'http://kino0104.github.io/blog/2015/06/07/atom-package/';
+        var disqus_url = 'http://kino0104.github.io/blog/2015/06/07/atom-package/';
         var disqus_script = 'embed.js';
       
     (function () {

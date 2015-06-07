@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: atom | プログラミングしたり。]]></title>
+  <link href="http://kino0104.github.io/blog/categories/atom/atom.xml" rel="self"/>
+  <link href="http://kino0104.github.io/"/>
+  <updated>2015-06-07T22:50:18+09:00</updated>
+  <id>http://kino0104.github.io/</id>
+  <author>
+    <name><![CDATA[kino0104]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Atomでパッケージ管理]]></title>
+    <link href="http://kino0104.github.io/blog/2015/06/07/atom-package/"/>
+    <updated>2015-06-07T21:20:29+09:00</updated>
+    <id>http://kino0104.github.io/blog/2015/06/07/atom-package</id>
+    <content type="html"><![CDATA[<p>最近、Atomを使用するようになりました。
+いくつかパッケージをインストールしてみたりしたのですが、他の環境でAtomを使用するようになったときのことを考えてパッケージ管理をどのようにできるのか調べてみました。</p>
+
+<!-- more -->
+
+
+<p>Atomでは、パッケージをStarというもので管理することができます。
+気に入ったパッケージにStarという目印をつけておくことができるものですが、インストールして使用しているパッケージにこのStarをつけておきます。このStarをつけたものだけをインストールすることがコマンドで簡単に実行できます。</p>
+
+<p>Starを使用するためには、<a href="https://atom.io/">Atom</a>にアクセスして、
+Sign inする必要があります。
+Sign in後に自分のページに行くと、API tokenという値が記載されていますので、copyします。</p>
+
+<p>また、ターミナルからatomのパッケージなどをインストールできるので、Atomエディタを開き、メニューバーの[Atom] > [Install Shell Commands]からatomコマンドとapmコマンドをインストールしておくと便利です。</p>
+
+<p>ターミナルでatom関連のコマンドが実行できるようになったら、下記コマンドでstarをつけます。</p>
+
+<pre><code>apm star &lt;package名&gt;
+</code></pre>
+
+<p>Starが付いているパッケージは、Atomの自分のページで確認できますし、
+下記のコマンドでも確認可能です。</p>
+
+<pre><code>apm stars
+</code></pre>
+
+<p>また、starを消したい場合は、</p>
+
+<pre><code>apm unstar &lt;package名&gt;
+</code></pre>
+
+<p>そして、starをつけたパッケージ全てをインストールしたい場合は、下記のように入力します。</p>
+
+<pre><code>apm stars --install
+</code></pre>
+
+<p>これで、いつでもどこでもどの端末にも同じパッケージをインストールできます！</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://kino0104.github.io/blog/2015/06/07/atom-package/</loc>
+    <lastmod>2015-06-07T21:20:29+09:00</lastmod>
+  </url>
+  <url>
     <loc>http://kino0104.github.io/blog/2015/04/14/vagrant-windows/</loc>
     <lastmod>2015-04-14T21:21:56+09:00</lastmod>
   </url>
@@ -31,6 +35,10 @@
   <url>
     <loc>http://kino0104.github.io/tool/git-command/</loc>
     <lastmod>2015-03-02T05:40:57+09:00</lastmod>
+  </url>
+  <url>
+    <loc>http://kino0104.github.io/blog/2014/08/26/php-security/</loc>
+    <lastmod>2014-08-26T00:00:00+09:00</lastmod>
   </url>
   <url>
     <loc>http://kino0104.github.io/blog/archives/</loc>
@@ -73,5 +81,8 @@
   </url>
   <url>
     <loc>http://kino0104.github.io/blog/categories/vagrant/</loc>
+  </url>
+  <url>
+    <loc>http://kino0104.github.io/blog/categories/atom/</loc>
   </url>
 </urlset>

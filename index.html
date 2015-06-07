@@ -9,7 +9,8 @@
   <meta name="author" content="kino0104">
 
   
-  <meta name="description" content="Windowsで、かつプロキシ環境下でVagrantを使用するまでの手順です。 ">
+  <meta name="description" content="最近、Atomを使用するようになりました。
+いくつかパッケージをインストールしてみたりしたのですが、他の環境でAtomを使用するようになったときのことを考えてパッケージ管理をどのようにできるのか調べてみました。 ">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +78,41 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/06/07/atom-package/">Atomでパッケージ管理</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-06-07T21:20:29+09:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>7</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>9:20 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>最近、Atomを使用するようになりました。
+いくつかパッケージをインストールしてみたりしたのですが、他の環境でAtomを使用するようになったときのことを考えてパッケージ管理をどのようにできるのか調べてみました。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2015/06/07/atom-package/">続きを読む &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -367,6 +403,229 @@ PHPのコードを記述して自分の中にしっかりと落とし込んで�
 
     </article>
   
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/08/26/php-security/">Php Security</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-08-26T00:00:00+09:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>26</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>12:00 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div id="toc_container" class="toc_transparent no_bullets">
+  <p class="toc_title">
+    - 目次 -
+  </p>
+  
+  <ul class="toc_list">
+    <li>
+      <a href="#htmlspecialchars"><span class="toc_number toc_depth_1">1</span> htmlspecialchars関数</a><ul>
+        <li>
+          <a href="#i"><span class="toc_number toc_depth_2">1.1</span> 対策</a>
+        </li>
+      </ul>
+    </li>
+    
+    <li>
+      <a href="#CSRF"><span class="toc_number toc_depth_1">2</span> クロスサイトリクエストフォージェリ（CSRF）対策</a><ul>
+        <li>
+          <a href="#CSRF-2"><span class="toc_number toc_depth_2">2.1</span> CSRFとはなんぞや？</a>
+        </li>
+        <li>
+          <a href="#i-2"><span class="toc_number toc_depth_2">2.2</span> 対策</a>
+        </li>
+      </ul>
+    </li>
+    
+    <li>
+      <a href="#i-3"><span class="toc_number toc_depth_1">3</span> セッションハイジャック</a><ul>
+        <li>
+          <a href="#i-4"><span class="toc_number toc_depth_2">3.1</span> セッションハイジャックとはなんぞや？</a>
+        </li>
+        <li>
+          <a href="#i-5"><span class="toc_number toc_depth_2">3.2</span> 対策は？</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+
+<p>現在、Webサービスを作成しようと奮闘中です。<br/>
+おそらく、セキュリティ対策という話をすると、色々と考慮すべきことがあるのだ思いますが、勉強教材にしているドットインストールさんの「ユーザー管理をするWebサービスを作ろう」で話に挙っていたものをまとめました。</p>
+
+<pre><code>htmlspecialchars関数
+クロスサイトリクエストフォージェリ（CSRF）対策
+セッションハイジャック対策
+</code></pre>
+
+<h2><span id="htmlspecialchars">htmlspecialchars関数</span></h2>
+
+<p>HTMLには特殊な意味を持つ文字があり、<br/>
+その文字をHTMLでの意味としてではなく、文字として表示するための関数。<br/>
+フォームなどからの悪意のある入力を無害化し、安全性を高めることができます。<br/>
+これを行わないとフォームにHTMLタグを入れることができるため、<br/>
+入力・送信された文字列によって、サイトのレイアウトが崩壊したり、ハッキングされたりして危険です。</p>
+
+<h3><span id="i">対策</span></h3>
+
+<pre><code>htmlspecialchars('文字列', 'エスケープ種類', '文字コード');
+</code></pre>
+
+<p>ちょっとコードが長いので、この関数を使用するときは、<br/>
+下記のようなfunctionを作成しておくと便利。<br/>
+こうすることで、エスケープしたい文字があれば、h()を使用すればOKになる。</p>
+
+<pre><code>function h($s){
+    return htmlspecialchars($s, ENT_QUOTES, "UTF-8");
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th style="text-align:center;">   エスケープ種類    </th>
+<th> 説明                       </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">  ENT_COMPAT  </td>
+<td> ダブルクォートを置き換える            </td>
+</tr>
+<tr>
+<td style="text-align:center;">  ENT_QUOTES  </td>
+<td> ダブルクォート、シングルクォート共に置き換える  </td>
+</tr>
+<tr>
+<td style="text-align:center;"> ENT_NOQUOTES </td>
+<td> ダブルクォート、シングルクォート共に置き換えない </td>
+</tr>
+</tbody>
+</table>
+
+
+<h2><span id="CSRF">クロスサイトリクエストフォージェリ（CSRF）対策</span></h2>
+
+<p>ざっくり一言でいうと、不正なPOSTを防ぐための対策。<br/>
+「フォームのある画面が表示されたときにフォームに対して<br/>
+トークンと呼ばれるIDを埋め込んでおき、フォームがPOSTされたときに<br/>
+設定したトークンと一致しているかを確認する」ということみたいだが、<br/>
+なんのこっちゃ意味不明。</p>
+
+<p>ドットインストールさんでも、気になる方は調べてみてねと<br/>
+言っていたのでもうちょっと調べてみた。</p>
+
+<h3><span id="CSRF-2">CSRFとはなんぞや？</span></h3>
+
+<p>CSRF（シーサーフ）はリクエスト強要と呼ばれる<br/>
+Webアプリケーションの脆弱性の一種だそうで…</p>
+
+<p>例えば、ユーザが掲示板にログインして何かを書き込むという操作は<br/>
+ユーザが意図しているため、問題ありません。<br/>
+しかし、このCSRFというのは悪意のあるサイト（CSRFが仕掛けられているサイト）にアクセスしただけで、掲示板に勝手に書き込みがされてしまうというもの。</p>
+
+<p>本来であれば、掲示板にログインして、<br/>
+そこで入力した書き込みが反映されるというのが正しいですが、<br/>
+掲示板以外からの投稿ができてしまうんですねー。<br/>
+CSRF対策というのは、こういう外部からのPOSTを防ぐ！<br/>
+掲示板からのPOSTのみ受け付ける！ようにするものみたいです。</p>
+
+<h3><span id="i-2">対策</span></h3>
+
+<p>トークンと呼ばれる推測困難な文字列を生成します。</p>
+
+<p>何かしらの情報をPOSTする際、HTMLでformタグを使用することになります。<br/>
+このフォームに生成したトークンを非表示で埋め込みます。<br/>
+Webアプリケーションにフォームの値が送信される際、このトークンも一緒に送信されます。生成したトークンとPOSTされるトークンが一致していればOKですし、NGであれば不正POSTと見なします。</p>
+
+<p>下記コードが対策になります。</p>
+
+<pre><code>function setToken(){
+    //変数tokenに推測困難なID(文字列)を高速に生成する
+    $token = sha1(uniqid(mt_rand(), true));
+    $_SESSION['token'] = $token;
+}
+
+function checkToken(){
+    //セッションが空あるいは、POST時されたトークンと異なる場合
+    if(empty($_SESSION['token']) || ($_SESSION['token'] != $_POST['token'])){
+        echo "不正なPOSTが行われました";
+        exit;
+    }
+
+    if($_SERVER['REQUEST_METHOD'] != 'POST'){
+        //リクエストがPOSTでない場合
+        setToken();
+    }else{
+        //リクエストがPOSTの場合
+        checkToken();
+}
+</code></pre>
+
+<p>以下、フォーム部分。</p>
+
+<pre>//非表示のフォームにトークンをセットする。
+<input type="hidden" name="token" value="<?php echo h($_SESSION['token']); ?>" />
+</pre>
+
+
+<h2><span id="i-3">セッションハイジャック</span></h2>
+
+<p>ドットインストールさんでは、決まり事だと思って頂いてといいながら<br/>
+下記コードを書いています。</p>
+
+<pre><code>session_regenerate_id(true);
+$_SESSION['me'] = $me;
+header('Location: http://example.com/index.php');
+</code></pre>
+
+<p>詳しくは調べてねという感じなので、これまた調べました。</p>
+
+<h3><span id="i-4">セッションハイジャックとはなんぞや？</span></h3>
+
+<p>利用者がWebサービスにログインしたときにセッションIDを発行して、<br/>
+以後ログインするときにセッションIDの情報をもとにログインする。<br/>
+これをセッション管理などと呼ぶわけですが、<br/>
+何らかの方法でネットワーク上でセッションが盗み見られたりする可能性があります。セッションIDがバレてしまうと乗っ取られて、なりすましでログインされてしまう可能性があります。<br/>
+怖いですね。</p>
+
+<h3><span id="i-5">対策は？</span></h3>
+
+<p>セッションIDが一度発行されてきり、ずっと同じIDを使用するのでは危険です。<br/>
+セッションIDが攻撃者に入手されたらアウトですし、攻撃者がセッションIDを指定してユーザに使用させるということもできるようです。</p>
+
+<p>つまり、同じセッションIDをずっと使っているのはよくないのです。</p>
+
+<p>そのため、ログイン後に既存のセッションを破棄して、<br/>
+新しいIDでセッションを開始するという手法が取られます。<br/>
+ログインするたびに、常に新しいIDを使用するのです。</p>
+
+<p>PHPでは、session_regenerate_id()関数を使用することで、<br/>
+セッションIDを新しいものと置き換えることができます。<br/>
+<code>sesseion_regenerate_id(true);</code>と引数をtrueとすることで、<br/>
+古いセッション情報を削除することができます。（PHP5.1.0以降）</p>
+
+<p>以上、ログイン処理時に考慮すべきセキュリティ対策の備忘でした。</p>
+</div>
+  
+  
+
+
+    </article>
+  
   <div class="pagination">
     
     <a href="/blog/archives">Blog Archives</a>
@@ -378,6 +637,10 @@ PHPのコードを記述して自分の中にしっかりと落とし込んで�
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/06/07/atom-package/">Atomでパッケージ管理</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2015/04/14/vagrant-windows/">WindowsでVagrantを使用する</a>
@@ -393,10 +656,6 @@ PHPのコードを記述して自分の中にしっかりと落とし込んで�
     
       <li class="post">
         <a href="/blog/2015/04/01/apache-mimetype-xlsx/">xlsxファイルをダウンロードしようとしたらzipがダウンロードされた</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/03/31/program-builtup-bookrv/">プログラムはこうして作られる、を読んでみた</a>
       </li>
     
   </ul>
