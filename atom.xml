@@ -4,7 +4,7 @@
   <title><![CDATA[プログラミングしたり。]]></title>
   <link href="http://kino0104.github.io/atom.xml" rel="self"/>
   <link href="http://kino0104.github.io/"/>
-  <updated>2015-06-07T22:50:18+09:00</updated>
+  <updated>2015-06-27T20:28:50+09:00</updated>
   <id>http://kino0104.github.io/</id>
   <author>
     <name><![CDATA[kino0104]]></name>
@@ -12,6 +12,188 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[CakePHPを導入する]]></title>
+    <link href="http://kino0104.github.io/blog/2015/06/27/cakephp-install/"/>
+    <updated>2015-06-27T19:29:46+09:00</updated>
+    <id>http://kino0104.github.io/blog/2015/06/27/cakephp-install</id>
+    <content type="html"><![CDATA[<p>CakePHPの導入方法について、記述します。
+事前準備として、サーバ環境はVagrantで構築して、<code>http://dev.cakephp-test.com/</code>というURLを与えています。
+これを<code>http://dev.cakephp-test.com/tutorial/</code>として、アクセスしてCakPHPを使用していきます。</p>
+
+<!-- more -->
+
+
+<h2>CakePHPをダウンロードする</h2>
+
+<p><a href="http://cakephp.jp/">公式サイト</a>からCakePHPをダウンロードして、作業ディレクトリにファイル一式コピーします。
+今回は、tutorialディレクトリを作成して、その中にコピーしました。</p>
+
+<p>ターミナルにて、作業ディレクトリに移動して下記コマンドを入力します。
+tmpディレクトリのアクセス権を変更します。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd tutorial
+</span><span class='line'>chmod -R 777 app/tmp</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>セキュリティ設定を変更する</h2>
+
+<p>この時点で、<code>http://dev.cakephp-test.com/tutorial/</code>にアクセスすると、色々とメッセージが出ていると思います。</p>
+
+<p>例えば…</p>
+
+<p>Notice (1024): Please change the value of &lsquo;Security.salt&rsquo; in APP/Config/core.php to a salt value specific to your application. [CORE/Cake/Utility/Debugger.php, line 846]
+Notice (1024): Please change the value of &lsquo;Security.cipherSeed&rsquo; in APP/Config/core.php to a numeric (digits only) seed value specific to your application. [CORE/Cake/Utility/Debugger.php, line 850]</p>
+
+<p>上記メッセージにあるように<code>app/config/core.php</code>を開いて、<code>Security.salt</code>,<code>Security.cipherSeed</code>の適当な好きな文字列に変更しましょう。</p>
+
+<h2>DBの設定を行う</h2>
+
+<p><code>app/config/database.php.default</code>ファイルをコピーして、<code>database.php</code>を作成します。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>vi app/Config/database.php</span></code></pre></td></tr></table></div></figure>
+
+
+<p>下記部分を変更します。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>public $default = array(
+</span><span class='line'>  'datasource' =&gt; 'Database/Mysql',
+</span><span class='line'>  'persistent' =&gt; false,
+</span><span class='line'>  'host' =&gt; 'localhost',
+</span><span class='line'>  'login' =&gt; 'dbuser',//DBのユーザ名
+</span><span class='line'>  'password' =&gt; 'dbuser',//パスワード
+</span><span class='line'>  'database' =&gt; 'tutorial',//使用するDB名に変更
+</span><span class='line'>  'prefix' =&gt; '',
+</span><span class='line'>  //'encoding' =&gt; 'utf8',
+</span><span class='line'>);
+</span><span class='line'>
+</span><span class='line'>public $test = array(
+</span><span class='line'>  'datasource' =&gt; 'Database/Mysql',
+</span><span class='line'>  'persistent' =&gt; false,
+</span><span class='line'>  'host' =&gt; 'localhost',
+</span><span class='line'>  'login' =&gt; 'dbuser',//DBのユーザ名(テスト用)
+</span><span class='line'>  'password' =&gt; 'dbuser',//パスワード(テスト用)
+</span><span class='line'>  'database' =&gt; 'tutorial_test',//使用するDB名に変更(テスト用)
+</span><span class='line'>  'prefix' =&gt; '',
+</span><span class='line'>  //'encoding' =&gt; 'utf8',
+</span><span class='line'>);</span></code></pre></td></tr></table></div></figure>
+
+
+<p>次にDBを作成します。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>vagrant ssh //仮想サーバにログイン
+</span><span class='line'>mysql -u root -p //パスワードは初期だとなし
+</span><span class='line'>create database tutorial
+</span><span class='line'>create database tutorial_test
+</span><span class='line'>grant all on tutorial.* to dbuser@localhost identified by 'dbuser';
+</span><span class='line'>exit
+</span><span class='line'>
+</span><span class='line'>mysql -u dbuser -p //パスワードはdbuser
+</span><span class='line'>show databases; //tutorialが見えればOK</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Debug_kitをダウンロードする</h2>
+
+<p>下記コマンドを入力します。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd app/Plugin
+</span><span class='line'>git clone git@github.com:cakephp/debug_kit.git</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>app/Config/bootstrap.php</code>に<code>CakePlugin::load('DebugKit');</code>という記述を追加します。</p>
+
+<p>また、<code>app/Controller/AppController.php</code>に下記内容を追加します。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>class AppController extends Controller {
+</span><span class='line'>    public $components = array('DebugKit.Toolbar'); // この行の追加
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>以上でCakePHPを使用する準備が整いました。
+あとは、[ブログチュートリアル]な(<a href="http://book.cakephp.org/2.0/ja/getting-started.html">http://book.cakephp.org/2.0/ja/getting-started.html</a>)どを参考に勉強していくのがよいですね！</p>
+
+<p>なお、この時点で<code>http://dev.cakephp-test.com/tutorial/</code>にアクセスしたときに下記のようなメッセージが表示されている場合は、以下のことを行ってみてください。</p>
+
+<p>メッセージ：URL rewriting is not properly configured on your server.  1) Help me configure it 2) I don&rsquo;t / can&rsquo;t use URL rewriting</p>
+
+<p><code>httpd.conf</code>を編集します。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo vi /etc/httpd/conf/httpd.conf
+</span><span class='line'>
+</span><span class='line'>//下記部分を編集します。
+</span><span class='line'>&lt;Directory /&gt;
+</span><span class='line'>    Options FollowSymLinks
+</span><span class='line'>    AllowOverride All //ここ
+</span><span class='line'>#    Order deny,allow
+</span><span class='line'>#    Deny from all
+</span><span class='line'>&lt;/Directory&gt;
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>次に、作業ディレクトリ(今回の場合、tutorial)に<code>.htaccess</code>ファイルを作成します。
+そして、下記内容を記述します。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;IfModule mod_rewrite.c&gt;
+</span><span class='line'>   RewriteEngine on
+</span><span class='line'>   RewriteRule    ^$ app/webroot/    [L]
+</span><span class='line'>   RewriteRule    (.*) app/webroot/$1 [L]
+</span><span class='line'>&lt;/IfModule&gt;</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Atomでパッケージ管理]]></title>

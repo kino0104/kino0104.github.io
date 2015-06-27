@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: cakephp | プログラミングしたり。]]></title>
+  <link href="http://kino0104.github.io/blog/categories/cakephp/atom.xml" rel="self"/>
+  <link href="http://kino0104.github.io/"/>
+  <updated>2015-06-27T20:28:50+09:00</updated>
+  <id>http://kino0104.github.io/</id>
+  <author>
+    <name><![CDATA[kino0104]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[CakePHPを導入する]]></title>
+    <link href="http://kino0104.github.io/blog/2015/06/27/cakephp-install/"/>
+    <updated>2015-06-27T19:29:46+09:00</updated>
+    <id>http://kino0104.github.io/blog/2015/06/27/cakephp-install</id>
+    <content type="html"><![CDATA[<p>CakePHPの導入方法について、記述します。
+事前準備として、サーバ環境はVagrantで構築して、<code>http://dev.cakephp-test.com/</code>というURLを与えています。
+これを<code>http://dev.cakephp-test.com/tutorial/</code>として、アクセスしてCakPHPを使用していきます。</p>
+
+<!-- more -->
+
+
+<h2>CakePHPをダウンロードする</h2>
+
+<p><a href="http://cakephp.jp/">公式サイト</a>からCakePHPをダウンロードして、作業ディレクトリにファイル一式コピーします。
+今回は、tutorialディレクトリを作成して、その中にコピーしました。</p>
+
+<p>ターミナルにて、作業ディレクトリに移動して下記コマンドを入力します。
+tmpディレクトリのアクセス権を変更します。</p>
+
+<pre><code>cd tutorial
+chmod -R 777 app/tmp
+</code></pre>
+
+<h2>セキュリティ設定を変更する</h2>
+
+<p>この時点で、<code>http://dev.cakephp-test.com/tutorial/</code>にアクセスすると、色々とメッセージが出ていると思います。</p>
+
+<p>例えば…</p>
+
+<p>Notice (1024): Please change the value of &lsquo;Security.salt&rsquo; in APP/Config/core.php to a salt value specific to your application. [CORE/Cake/Utility/Debugger.php, line 846]
+Notice (1024): Please change the value of &lsquo;Security.cipherSeed&rsquo; in APP/Config/core.php to a numeric (digits only) seed value specific to your application. [CORE/Cake/Utility/Debugger.php, line 850]</p>
+
+<p>上記メッセージにあるように<code>app/config/core.php</code>を開いて、<code>Security.salt</code>,<code>Security.cipherSeed</code>の適当な好きな文字列に変更しましょう。</p>
+
+<h2>DBの設定を行う</h2>
+
+<p><code>app/config/database.php.default</code>ファイルをコピーして、<code>database.php</code>を作成します。</p>
+
+<pre><code>vi app/Config/database.php
+</code></pre>
+
+<p>下記部分を変更します。</p>
+
+<pre><code>public $default = array(
+  'datasource' =&gt; 'Database/Mysql',
+  'persistent' =&gt; false,
+  'host' =&gt; 'localhost',
+  'login' =&gt; 'dbuser',//DBのユーザ名
+  'password' =&gt; 'dbuser',//パスワード
+  'database' =&gt; 'tutorial',//使用するDB名に変更
+  'prefix' =&gt; '',
+  //'encoding' =&gt; 'utf8',
+);
+
+public $test = array(
+  'datasource' =&gt; 'Database/Mysql',
+  'persistent' =&gt; false,
+  'host' =&gt; 'localhost',
+  'login' =&gt; 'dbuser',//DBのユーザ名(テスト用)
+  'password' =&gt; 'dbuser',//パスワード(テスト用)
+  'database' =&gt; 'tutorial_test',//使用するDB名に変更(テスト用)
+  'prefix' =&gt; '',
+  //'encoding' =&gt; 'utf8',
+);
+</code></pre>
+
+<p>次にDBを作成します。</p>
+
+<pre><code>vagrant ssh //仮想サーバにログイン
+mysql -u root -p //パスワードは初期だとなし
+create database tutorial
+create database tutorial_test
+grant all on tutorial.* to dbuser@localhost identified by 'dbuser';
+exit
+
+mysql -u dbuser -p //パスワードはdbuser
+show databases; //tutorialが見えればOK
+</code></pre>
+
+<h2>Debug_kitをダウンロードする</h2>
+
+<p>下記コマンドを入力します。</p>
+
+<pre><code>cd app/Plugin
+git clone git@github.com:cakephp/debug_kit.git
+</code></pre>
+
+<p><code>app/Config/bootstrap.php</code>に<code>CakePlugin::load('DebugKit');</code>という記述を追加します。</p>
+
+<p>また、<code>app/Controller/AppController.php</code>に下記内容を追加します。</p>
+
+<pre><code>class AppController extends Controller {
+    public $components = array('DebugKit.Toolbar'); // この行の追加
+}
+</code></pre>
+
+<p>以上でCakePHPを使用する準備が整いました。
+あとは、[ブログチュートリアル]な(<a href="http://book.cakephp.org/2.0/ja/getting-started.html">http://book.cakephp.org/2.0/ja/getting-started.html</a>)どを参考に勉強していくのがよいですね！</p>
+
+<p>なお、この時点で<code>http://dev.cakephp-test.com/tutorial/</code>にアクセスしたときに下記のようなメッセージが表示されている場合は、以下のことを行ってみてください。</p>
+
+<p>メッセージ：URL rewriting is not properly configured on your server.  1) Help me configure it 2) I don&rsquo;t / can&rsquo;t use URL rewriting</p>
+
+<p><code>httpd.conf</code>を編集します。</p>
+
+<pre><code>sudo vi /etc/httpd/conf/httpd.conf
+
+//下記部分を編集します。
+&lt;Directory /&gt;
+    Options FollowSymLinks
+    AllowOverride All //ここ
+#    Order deny,allow
+#    Deny from all
+&lt;/Directory&gt;
+</code></pre>
+
+<p>次に、作業ディレクトリ(今回の場合、tutorial)に<code>.htaccess</code>ファイルを作成します。
+そして、下記内容を記述します。</p>
+
+<pre><code>&lt;IfModule mod_rewrite.c&gt;
+   RewriteEngine on
+   RewriteRule    ^$ app/webroot/    [L]
+   RewriteRule    (.*) app/webroot/$1 [L]
+&lt;/IfModule&gt;
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>
