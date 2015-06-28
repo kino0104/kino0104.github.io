@@ -4,7 +4,7 @@
   <title><![CDATA[Category: php | プログラミングしたり。]]></title>
   <link href="http://kino0104.github.io/blog/categories/php/atom.xml" rel="self"/>
   <link href="http://kino0104.github.io/"/>
-  <updated>2015-06-27T20:28:50+09:00</updated>
+  <updated>2015-06-28T14:18:12+09:00</updated>
   <id>http://kino0104.github.io/</id>
   <author>
     <name><![CDATA[kino0104]]></name>
@@ -12,6 +12,47 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[[CakePHP]ページのタイトル変更について]]></title>
+    <link href="http://kino0104.github.io/blog/2015/06/28/cakephp-layout-title/"/>
+    <updated>2015-06-28T13:31:34+09:00</updated>
+    <id>http://kino0104.github.io/blog/2015/06/28/cakephp-layout-title</id>
+    <content type="html"><![CDATA[<p>CakePHPでサイト構築して、ページタイトルを変更する方法を紹介します。
+デフォルトのままだと、「CakePHP: the rapid development php framework:(ViewPath)」となります。
+これを任意の値に変える必要があるかと思います。非常に簡単に変えることができます。</p>
+
+<!-- more -->
+
+
+<p>デフォルトのままだと、(ViewPath)になると上記で記述しましたが、どういうことかと言いますと、例えばModel:Postがあり、ControllerとしてPostsControllerがあった場合、ViewはViewディレクトリ配下にPostsディレクトリを作成し、その中に<code>index.ctp</code>などを置きます。
+このときのPostsディレクトリ名がViewPathと書いた部分に当たります。</p>
+
+<p>そして、ページタイトルは<code>app/View/Layouts/default.ctp</code>に記述があります。</p>
+
+<pre><code>&lt;title&gt;
+  &lt;?php echo $cakeDescription ?&gt;:
+  &lt;?php echo $this-&gt;fetch('title'); ?&gt;
+&lt;/title&gt;
+</code></pre>
+
+<p>ここから、タイトルは<code>$cakeDescription</code>と<code>:</code>、<code>$this-&gt;fetch('title')</code>が組合わさったものだとわかります。
+<code>$cakeDescription</code>については同じファイルの中に<code>$cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework');</code>と記述がありますね。不要であれば、削除しましょう。</p>
+
+<p><code>$this-&gt;fetch('title');</code>の部分は各viewのファイルごとにある記述をすることで、ページタイトルを変更することができるようになっています。</p>
+
+<p>例えば、<code>index.ctp</code>のページタイトルを「記事一覧」にしようと思ったら、<code>index.ctp</code>に以下の記述を追加します。</p>
+
+<pre><code>&lt;?php
+$this-&gt;assign('title', '記事一覧');
+//assign()の第一引数はfetch()の引数と合わせます。第二引数にページタイトルを記述します。
+?&gt;
+</code></pre>
+
+<p>これで、任意のページタイトルに変更できます。
+<code>add.ctp</code>や<code>edit.ctp</code>などの他のviewファイルも同じ記述を追加することで、ページごとにタイトルを変更できます。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[CakePHPを導入する]]></title>

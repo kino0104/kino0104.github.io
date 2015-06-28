@@ -5,12 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>WindowsでVagrantを使用する - プログラミングしたり。</title>
+  <title>[CakePHP]ページのタイトル変更について - プログラミングしたり。</title>
   <meta name="author" content="kino0104">
 
   
-  <meta name="description" content="Windowsで、かつプロキシ環境下でVagrantを使用するまでの手順です。 VirtualBoxをインストール VirtualBoxのダウンロードページよりインストールします。 Vagrantをインストール Vagrantのダウンロードページより
-インストールします。 Boxをダウンロードする &hellip;">
+  <meta name="description" content="CakePHPでサイト構築して、ページタイトルを変更する方法を紹介します。
+デフォルトのままだと、「CakePHP: the rapid development php framework:(ViewPath)」となります。
+これを任意の値に変える必要があるかと思います。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +20,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://kino0104.github.io/blog/2015/04/14/vagrant-windows/">
+  <link rel="canonical" href="http://kino0104.github.io/blog/2015/06/28/cakephp-layout-title/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="プログラミングしたり。" type="application/atom+xml">
@@ -81,7 +82,7 @@
   
   <header>
     
-      <h1 class="entry-title">WindowsでVagrantを使用する</h1>
+      <h1 class="entry-title">[CakePHP]ページのタイトル変更について</h1>
     
     
       <p class="meta">
@@ -90,90 +91,54 @@
 
 
 
-<time class='entry-date' datetime='2015-04-14T21:21:56+09:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>9:21 pm</span></time>
+<time class='entry-date' datetime='2015-06-28T13:31:34+09:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>28</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>1:31 pm</span></time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>Windowsで、かつプロキシ環境下でVagrantを使用するまでの手順です。</p>
+<div class="entry-content"><p>CakePHPでサイト構築して、ページタイトルを変更する方法を紹介します。
+デフォルトのままだと、「CakePHP: the rapid development php framework:(ViewPath)」となります。
+これを任意の値に変える必要があるかと思います。非常に簡単に変えることができます。</p>
 
 <!-- more -->
 
 
-<h2>VirtualBoxをインストール</h2>
+<p>デフォルトのままだと、(ViewPath)になると上記で記述しましたが、どういうことかと言いますと、例えばModel:Postがあり、ControllerとしてPostsControllerがあった場合、ViewはViewディレクトリ配下にPostsディレクトリを作成し、その中に<code>index.ctp</code>などを置きます。
+このときのPostsディレクトリ名がViewPathと書いた部分に当たります。</p>
 
-<p>VirtualBoxの<a href="https://www.virtualbox.org/wiki/Downloads">ダウンロードページ</a>よりインストールします。</p>
-
-<h2>Vagrantをインストール</h2>
-
-<p>Vagrantの<a href="https://www.vagrantup.com/downloads.html">ダウンロードページ</a>より
-インストールします。</p>
-
-<h2>Boxをダウンロードする</h2>
-
-<p>Boxとは、仮想マシンのテンプレートのことですが、
-これをコマンドプロンプトからダウンロードします。</p>
-
-<p>プロキシ環境下の場合は、http_proxyとhttps_proxyに&#8221;プロキシサーバ:ポート番号&#8221;を記述します。</p>
-
-<p>下記のように、コマンドプロンプト上でコマンドを入力します。（プロキシサーバとポートは自身の環境に合わせてください）
-※コマンドプロンプトを閉じると、下記設定は無効になります。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>set http_proxy="http://proxy.example.com:80"
-</span><span class='line'>set https_proxy="http://proxy.example.com:80"</span></code></pre></td></tr></table></div></figure>
-
-
-<p>次に、Boxをダウンロードします。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>vagrant box add centos64box http://developer.nrel.gov/downloads/vagrant-boxes/CentOS-6.4-x86_64-v20130731.box</span></code></pre></td></tr></table></div></figure>
-
-
-<h1>仮想マシンを立ち上げる</h1>
-
-<p>ダウンロードが完了したら、仮想マシンを動かしたいフォルダに移動しましょう。</p>
-
-<p>移動後に、<code>vagrantfile</code>という設定ファイルを作成するために下記コマンドを入力します。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>vagrant init centos64box</span></code></pre></td></tr></table></div></figure>
-
-
-<p><code>vagrantfile</code>をテキストエディタで開き、private_networkと書かれたところを検索します。
-ip：&#8221;192.168.33.10&#8221;と書いてある行の#を削除します。</p>
+<p>そして、ページタイトルは<code>app/View/Layouts/default.ctp</code>に記述があります。</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>  # Create a private network, which allows host-only access to the machine
-</span><span class='line'>  # using a specific IP.
-</span><span class='line'>   config.vm.network "private_network", ip: "192.168.33.10" //この行の#を削除</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;title&gt;
+</span><span class='line'>  &lt;?php echo $cakeDescription ?&gt;:
+</span><span class='line'>  &lt;?php echo $this-&gt;fetch('title'); ?&gt;
+</span><span class='line'>&lt;/title&gt;</span></code></pre></td></tr></table></div></figure>
 
 
-<p>次に、下記コマンドで仮想マシンを起動します。</p>
+<p>ここから、タイトルは<code>$cakeDescription</code>と<code>:</code>、<code>$this-&gt;fetch('title')</code>が組合わさったものだとわかります。
+<code>$cakeDescription</code>については同じファイルの中に<code>$cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework');</code>と記述がありますね。不要であれば、削除しましょう。</p>
+
+<p><code>$this-&gt;fetch('title');</code>の部分は各viewのファイルごとにある記述をすることで、ページタイトルを変更することができるようになっています。</p>
+
+<p>例えば、<code>index.ctp</code>のページタイトルを「記事一覧」にしようと思ったら、<code>index.ctp</code>に以下の記述を追加します。</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>vagrant up</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;?php
+</span><span class='line'>$this-&gt;assign('title', '記事一覧');
+</span><span class='line'>//assign()の第一引数はfetch()の引数と合わせます。第二引数にページタイトルを記述します。
+</span><span class='line'>?&gt;</span></code></pre></td></tr></table></div></figure>
 
 
-<h2>仮想マシンに接続する</h2>
-
-<p>先ほど、<code>vagrantfile</code>の設定で、<code>ip: "192.168.33.10"</code>を有効にしました。
-私の環境では、TeraTermというソフトが入っていますので、このソフトを用いてssh接続します。
-（ssh接続できれば他のソフトでも大丈夫かと思います。）</p>
-
-<p>TeraTermでホスト欄に<code>192.168.33.10</code>を入力します。
-ユーザ名とパスワードは<code>vagrant</code>でログインすることができます。</p>
-
-<p>ここまででVagrantを使用できる環境になりましたので、
-この後、Apacheだとかを色々インストールして使ってみてください。</p>
-
-<p>以上、簡単ではありますが、
-Windows環境でVagrantを使用する手順をご紹介しました。</p>
+<p>これで、任意のページタイトルに変更できます。
+<code>add.ctp</code>や<code>edit.ctp</code>などの他のviewファイルも同じ記述を追加することで、ページごとにタイトルを変更できます。</p>
 </div>
 
 
@@ -189,12 +154,12 @@ Windows環境でVagrantを使用する手順をご紹介しました。</p>
 
 
 
-<time class='entry-date' datetime='2015-04-14T21:21:56+09:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>9:21 pm</span></time>
+<time class='entry-date' datetime='2015-06-28T13:31:34+09:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>28</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>1:31 pm</span></time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/vagrant/'>vagrant</a>, <a class='category' href='/blog/categories/windows/'>windows</a>
+    <a class='category' href='/blog/categories/cakephp/'>cakephp</a>, <a class='category' href='/blog/categories/php/'>php</a>
   
 </span>
 
@@ -206,20 +171,20 @@ Windows環境でVagrantを使用する手順をご紹介しました。</p>
         <li class="hatena">
           <!-- hatebu-start -->
           
-          <a href="http://b.hatena.ne.jp/entry/http://kino0104.github.io/blog/2015/04/14/vagrant-windows/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+          <a href="http://b.hatena.ne.jp/entry/http://kino0104.github.io/blog/2015/06/28/cakephp-layout-title/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
           
           <!-- hatebu-end -->
         </li>
         <li class="twitter">
             
                 
-                <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://kino0104.github.io/blog/2015/04/14/vagrant-windows/" data-via="kino_0104" data-counturl="http://kino0104.github.io/blog/2015/04/14/vagrant-windows/" >Tweet</a>
+                <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://kino0104.github.io/blog/2015/06/28/cakephp-layout-title/" data-via="kino_0104" data-counturl="http://kino0104.github.io/blog/2015/06/28/cakephp-layout-title/" >Tweet</a>
                 
             
         </li>
         <li class="facebook">
             
-            <div class="fb-like" data-send="false" data-layout="button_count" data-show-faces="false" data-font="verdana" data-href="http://kino0104.github.io/blog/2015/04/14/vagrant-windows/"></div>
+            <div class="fb-like" data-send="false" data-layout="button_count" data-show-faces="false" data-font="verdana" data-href="http://kino0104.github.io/blog/2015/06/28/cakephp-layout-title/"></div>
             
         </li>
         <li class="pocket">
@@ -234,10 +199,8 @@ Windows環境でVagrantを使用する手順をご紹介しました。</p>
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2015/04/12/algorithm-array/" title="Previous Post: 配列関連のアルゴリズム">&laquo; 配列関連のアルゴリズム</a>
+        <a class="basic-alignment left" href="/blog/2015/06/27/cakephp-install/" title="Previous Post: CakePHPを導入する">&laquo; CakePHPを導入する</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2015/06/07/atom-package/" title="Next Post: Atomでパッケージ管理">Atomでパッケージ管理 &raquo;</a>
       
     </p>
   </footer>
@@ -353,8 +316,8 @@ Windows環境でVagrantを使用する手順をご紹介しました。</p>
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://kino0104.github.io/blog/2015/04/14/vagrant-windows/';
-        var disqus_url = 'http://kino0104.github.io/blog/2015/04/14/vagrant-windows/';
+        var disqus_identifier = 'http://kino0104.github.io/blog/2015/06/28/cakephp-layout-title/';
+        var disqus_url = 'http://kino0104.github.io/blog/2015/06/28/cakephp-layout-title/';
         var disqus_script = 'embed.js';
       
     (function () {
