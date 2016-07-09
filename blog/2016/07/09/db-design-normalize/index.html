@@ -5,11 +5,15 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: linux - プログラミングしたり。</title>
+  <title>正規化について - プログラミングしたり。</title>
   <meta name="author" content="kino0104">
 
   
-  <meta name="description" content="Category: linux">
+  <meta name="description" content="達人に学ぶDB設計徹底指南書を読んだので、
+正規化(第3正規化まで)についてまとめておく。 正規化とは、関数従属性を満たすように整理していくこと。
+入力Xに対して、出力Yが一つに決まることをYはXに従属すると呼び、
+{X}→{Y}　と表現する。 以下、正規化のポイント
+* &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +22,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://kino0104.github.io/blog/categories/linux/">
+  <link rel="canonical" href="http://kino0104.github.io/blog/2016/07/09/db-design-normalize/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="プログラミングしたり。" type="application/atom+xml">
@@ -76,36 +80,147 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: linux</h1>
+    
+      <h1 class="entry-title">正規化について</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-07-09T20:43:08+09:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>9</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>8:43 pm</span></time>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p>達人に学ぶDB設計徹底指南書を読んだので、
+正規化(第3正規化まで)についてまとめておく。</p>
 
-  
-  <h2>2015</h2>
+<p>正規化とは、関数従属性を満たすように整理していくこと。
+入力Xに対して、出力Yが一つに決まることをYはXに従属すると呼び、
+{X}→{Y}　と表現する。</p>
 
-<article>
-  
-<h1><a href="/blog/2015/04/01/apache-mimetype-xlsx/">xlsxファイルをダウンロードしようとしたらzipがダウンロードされた</a></h1>
-<time datetime="2015-04-01T21:43:22+09:00" pubdate><span class='month'>Apr</span> <span class='day'>01</span> <span class='year'>2015</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/apache/'>apache</a>, <a class='category' href='/blog/categories/gnu/'>gnu</a>, <a class='category' href='/blog/categories/linux/'>linux</a></span>
-</footer>
+<!-- more -->
 
 
-</article>
+<p>以下、正規化のポイント
+* 更新時の不整合を排除するために行う
+* 従属性を見抜くことで可能になる
+* 正規形はいつでも非正規形に戻せる
+* 第3正規形までは原則行う。
+* 関連エンティティが存在する場合は関連とエンティティが1対1に対応するよう注意する
+* テーブルの持つ意味が明確になる
+* テーブル数が増え、SQL文で結合処理が増えるため、パフォーマンスが悪化する</p>
 
+<h2>第1正規形</h2>
+
+<p>第1正規化の定義は「一つのセルの中には一つの値しか含まない」、スカラ値であることを指す。</p>
+
+<p>一つのセルに複数の値が入ると、主キーが各列の値を一意に決定できないため、
+リレーショナルデータベースは第1正規形を満たすテーブルを作らなければならない。</p>
+
+<h2>第2正規形</h2>
+
+<p>主キー以外の列は主キーに従属する必要があるが、
+主キーの一部の列に対して従属する列がある場合、
+そのような関係を部分関数従属と呼ぶ。
+主キーを構成する全ての列に従属する場合、完全関数従属と呼ぶ。</p>
+
+<p>第2正規形とは、部分関数従属を解消し、完全関数従属にすること。</p>
+
+<p>第2正規形でないと、部分関数従属している列にデータを登録したいときに、
+他の主キーの値が決まっていないと、登録できない、あるいはダミー値を入れる必要が出てくること。
+また、部分関数従属している列の値が{C0001,A商事}、{C0001,A商社}などとマチマチになってしまう
+可能性があること。</p>
+
+<p>第2正規化は異なるレベルの実体(エンティティ)をテーブルとしても分離する作業と言える。</p>
+
+<h2>第3正規形</h2>
+
+<p>テーブル内部に存在する段階的な従属関係を推移的関数従属と呼び、
+これらを解消すること。</p>
+
+<p>下記のように二段階の関数従属を解消し、非キー列をキー列に対してのみ従属させる。
+{社員ID}→{部署コード}→{部署名}</p>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">kino0104</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2016-07-09T20:43:08+09:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>9</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>8:43 pm</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/db/'>db</a>, <a class='category' href='/blog/categories/sql/'>sql</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing social_box">
+    <ul class="social">
+        <li class="hatena">
+          <!-- hatebu-start -->
+          
+          <a href="http://b.hatena.ne.jp/entry/http://kino0104.github.io/blog/2016/07/09/db-design-normalize/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+          
+          <!-- hatebu-end -->
+        </li>
+        <li class="twitter">
+            
+                
+                <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://kino0104.github.io/blog/2016/07/09/db-design-normalize/" data-via="kino_0104" data-counturl="http://kino0104.github.io/blog/2016/07/09/db-design-normalize/" >Tweet</a>
+                
+            
+        </li>
+        <li class="facebook">
+            
+            <div class="fb-like" data-send="false" data-layout="button_count" data-show-faces="false" data-font="verdana" data-href="http://kino0104.github.io/blog/2016/07/09/db-design-normalize/"></div>
+            
+        </li>
+        <li class="pocket">
+        	
+        	<a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="en"></a>
+        	<script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        	
+        </li>
+    </ul>
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2015/06/28/cakephp-layout-title/" title="Previous Post: [CakePHP]ページのタイトル変更について">&laquo; [CakePHP]ページのタイトル変更について</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -210,7 +325,10 @@
       var disqus_shortname = 'gkino0104o';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://kino0104.github.io/blog/2016/07/09/db-design-normalize/';
+        var disqus_url = 'http://kino0104.github.io/blog/2016/07/09/db-design-normalize/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
